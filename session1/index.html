@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>hiiii</h1>
+  <input type="text" id="input">
+  <button id="submit">add data</button>
+  <button class="bts"></button>
+  <ul id="list">
+  </ul>
+
+  </ul>
+  <script>
+    const input = document.querySelector('#input')
+    const btnForSubmit = document.querySelector('#submit')
+    const list = document.querySelector('#list')
+    btnForSubmit.addEventListener('click', updateData)
+
+    function updateData() {
+      const text = input.value
+      const sourceData = list.innerHTML
+      const string = sourceData +
+        `<li>
+          ${ text }
+          <button class="btns">remove</button>
+        </li>`
+
+      console.log(sourceData)
+      list.innerHTML = string
+
+      const btns = document.querySelectorAll('.btns')
+      btns.forEach(btn => {
+        btn.addEventListener('click', removeData)
+      })
+    }
+
+    function removeData(e) {
+      console.log(e.target.parentNode.remove())
+    }
+
+    const people = [
+      {
+        name: 'sb',
+        like: 'bas',
+        age: 3
+      },
+      {
+        name: 'sbsdf',
+        like: 'ba1234s',
+        age: 5
+      },
+      {
+        name: 'sbasdf',
+        like: 'badfass',
+        age: 65
+      },
+      {
+        name: 'sbs',
+        like: 'baasdfs',
+        age: 10
+      }
+    ]
+
+    let data = []
+    people.forEach((person, i) => {
+      if (person.age < 20) {
+        data.push(person)
+      }
+    })
+
+    console.log(data)
+
+    let originString = 'my name is ' + people[0].name + '.'
+    let es6String = `my name is ${ people[2].name }.`
+    console.log(es6String)
+
+    let htmlStr = ''
+    people.forEach((person, i) => {
+      htmlStr = htmlStr +
+        `<li>
+        my name is ${ person.name }.
+        </li>`
+    })
+    console.log(`<ul>${htmlStr}</ul>`)
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>hiiii</h1>
+  <input type="text" id="input">
+  <button id="submit">add data</button>
+  <ul id="list">
+  </ul>
+
+  </ul>
+  <script>
+    const input = document.querySelector('#input')
+    const btnForSubmit = document.querySelector('#submit')
+    const list = document.querySelector('#list')
+    btnForSubmit.addEventListener('click', updateData)
+    const data = []
+
+    function render () {
+      let htmlStr = ''
+      data.forEach((item, i) => {
+        htmlStr += `
+          <li>
+            ${ item }
+            <button class="btns" data-id="${ i }" onclick="removeData(this)">remove</button>
+          </li>
+        `
+      })
+
+      list.innerHTML = htmlStr
+    }
+
+    function removeData (elem) {
+      data.splice(elem.dataset.id, 1)
+      render()
+    }
+
+    function updateData() {
+      data.push(input.value)
+      render()
+    }
+  </script>
+</body>
+</html>

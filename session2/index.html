@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+  <script>
+    var a = '全域'
+    function fn (b) {
+      console.log(a, b, window, this, arguments)
+      // debugger
+    }
+    fn ('a', 1, 2, 3)
+
+    // 物件下
+    var myNmae = '全域'
+    var obj = {
+      myName: '小明',
+      fn: function () {
+        console.log(this.myName)
+      }
+    }
+    obj.fn()
+
+
+    function fn () {
+      console.log(this.myName)
+    }
+
+    var obj = {
+      myName: '小明',
+      fn: fn
+    }
+
+    // 物件下呼叫
+    // 如果是傳統函式，只看呼叫方這個物件（不看函式如何定義）
+    // 箭頭函式 -> 是看如何定義的，他沒有自己的 this
+    obj.fn()
+
+
+    var obj = {
+      myName: '小明',
+      inner: {
+        myName: '小明家',
+        fn: fn
+      }
+    }
+    obj.inner.fn()
+
+
+
+    var obj = {
+      myName: '小明',
+      inner: {
+        myName: '小明家',
+        fn: fn
+      }
+    }
+    obj.inner.fn()
+
+
+    var obj = {
+      myName: '小明',
+      inner: {
+        myName: '小明家',
+        fn1: function () {
+          fn()
+          //
+          console.log()
+          //
+          setTimeout(function () {
+            console.log(this.myName)
+          })
+          //
+          ;(() => {
+            console.log(this.myName)
+          })()
+        }
+      }
+    }
+    obj.inner.fn1()
+  </script>
+</body>
+</html>
