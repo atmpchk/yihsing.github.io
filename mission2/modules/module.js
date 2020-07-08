@@ -1,6 +1,6 @@
 export default {
   data: {
-    uuid: '請填入自己的 UUID',
+    uuid: '840d218c-ef17-4e49-90d3-cfef6170a5e5',
     products: [],
   },
   getData: function() {
