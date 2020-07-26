@@ -12,10 +12,19 @@ Vue.component('product-editor', {
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-4">
-              <div class="form-group">
-                <label for="imageUrl">圖片網址</label>
-                <input type="text" id="imageUrl" v-model="formData.imageUrl[0]" class="form-control" placeholder="請輸入圖片連結">
+              <div class="form-group" v-for="n in 5" :key="'imageUrl' + n">
+                <label :for="'imageUrl' + n">{{ '圖片網址 ' + n }}</label>
+                <input type="text" :id="'imageUrl' + n" v-model="formData.imageUrl[n - 1]" class="form-control" placeholder="請輸入圖片連結">
               </div>
+
+              <div class="form-group">
+                <label for="fileUpload">
+                  或 上傳圖片
+                  <i v-if="fileUploading" class="fas fa-spinner fa-spin"></i>
+                </label>
+                <input id="fileUpload" ref="file" type="file" class="form-control" @change="uploadFile">
+              </div>
+
               <img class="img-fluid" :src="formData.imageUrl[0]">
             </div>
             <div class="col-sm-8">
@@ -53,7 +62,7 @@ Vue.component('product-editor', {
                 <textarea id="content" v-model="formData.content" class="form-control" placeholder="請輸入產品說明">
                 </textarea>
               </div>
-              <div class="form-group">
+              <div class="form-group" v-if="formData.options">
                 <label for="stars">產品評價</label>
                 <input type="number" id="stars" v-model="formData.options.stars" min="0" max="5" class="form-control" placeholder="請輸入評價等級">
                 </textarea>
@@ -80,6 +89,7 @@ Vue.component('product-editor', {
     return {
       apiInfo: {
         forSingleProduct: '/admin/ec/product',
+        forFileUpload: '/admin/storage'
       },
       mode: {
         new: 0,
@@ -115,9 +125,8 @@ Vue.component('product-editor', {
           stars: 0
         }
       },
+      fileUploading: false
     }
-  },
-  created () {
   },
   methods: {
     clearFormData () {
@@ -156,6 +165,26 @@ Vue.component('product-editor', {
     },
     hideSelf () {
       $('#productModal').modal('hide')
+    },
+    uploadFile () {
+      this.fileUploading = true
+
+      const fileReference = this.$refs.file.files[0]
+      const form = new FormData()
+      form.append('file', fileReference)
+      axios.post(this.apiInfo.forFileUpload, form, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then((res) => {
+        this.fileUploading = false
+        if (res.status === 200) {
+          this.formData.imageUrl.push(res.data.data.path)
+        }
+      }).catch(() => {
+        console.log('上傳不可超過 2 MB')
+        this.fileUploading = false
+      })
     }
   }
 })

@@ -8,7 +8,7 @@ Vue.component('pagination', {
           <span class="sr-only">Previous</span>
         </a>
       </li>
-      <li class="page-item" :class="{ 'active': isCurrentPageMatch(n) }" v-for="(n, index) in totalPages" :key="index">
+      <li class="page-item" :class="{ 'active': isCurrentPageMatch(n) }" v-for="n in totalPages" :key="'page' + n">
         <a class="page-link" href="#" @click.prevent="goToPage(n)">{{ n }} <span v-if="isCurrentPageMatch(n)" class="sr-only">(current)</span></a>
       </li>
       <li class="page-item" :class="{ 'disabled': isNextNotAvailable }">
