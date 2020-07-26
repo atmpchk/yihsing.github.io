@@ -24,6 +24,9 @@ Vue.component('product-remover', {
   `,
   data () {
     return {
+      apiInfo: {
+        forSingleProduct: '/admin/ec/product',
+      },
       toBeDeleteProduct: {}
     }
   },
@@ -32,7 +35,7 @@ Vue.component('product-remover', {
       this.toBeDeleteProduct = product
     },
     deleteProduct () {
-      axios.delete(`/admin/ec/product/${this.toBeDeleteProduct.id}`).then(() => {
+      axios.delete(`${this.apiInfo.forSingleProduct}/${this.toBeDeleteProduct.id}`).then(() => {
         this.$emit('refresh-product-list')
         this.hideSelf()
       }).catch((err) => {

@@ -78,6 +78,9 @@ Vue.component('product-editor', {
   props: [ 'modalMode' ],
   data () {
     return {
+      apiInfo: {
+        forSingleProduct: '/admin/ec/product',
+      },
       mode: {
         new: 0,
         edit: 1
@@ -121,7 +124,7 @@ Vue.component('product-editor', {
       this.formData = JSON.parse(JSON.stringify(this.cleanData))
     },
     prepareProduct (id) {
-      axios.get(`/admin/ec/product/${id}`).then((result) => {
+      axios.get(`${this.apiInfo.forSingleProduct}/${id}`).then((result) => {
         this.formData = result.data.data
       }).catch((err) => {
         console.log(err)
@@ -136,7 +139,7 @@ Vue.component('product-editor', {
       }
     },
     newProduct () {
-      axios.post('/admin/ec/product', this.formData).then(() => {
+      axios.post(this.apiInfo.forSingleProduct, this.formData).then(() => {
         this.$emit('refresh-product-list')
         this.hideSelf()
       }).catch((err) => {
@@ -144,7 +147,7 @@ Vue.component('product-editor', {
       })
     },
     editProduct () {
-      axios.patch(`/admin/ec/product/${this.formData.id}`, this.formData).then(() => {
+      axios.patch(`${this.apiInfo.forSingleProduct}/${this.formData.id}`, this.formData).then(() => {
         this.$emit('refresh-product-list')
         this.hideSelf()
       }).catch((err) => {

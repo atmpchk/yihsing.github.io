@@ -3,7 +3,8 @@ new Vue({
   data: {
     apiInfo: {
       UUID: '840d218c-ef17-4e49-90d3-cfef6170a5e5',
-      token: ''
+      token: '',
+      forProductList: '/admin/ec/products'
     },
     mode: {
       new: 0,
@@ -26,7 +27,7 @@ new Vue({
   },
   methods: {
     getProductList () {
-      axios.get('/admin/ec/products').then((result) => {
+      axios.get(this.apiInfo.forProductList).then((result) => {
         this.products = result.data.data
       })
     },
