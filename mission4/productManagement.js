@@ -2,7 +2,8 @@ new Vue({
   el: '#app',
   data: {
     apiInfo: {
-      UUID: '840d218c-ef17-4e49-90d3-cfef6170a5e5'
+      UUID: '840d218c-ef17-4e49-90d3-cfef6170a5e5',
+      token: ''
     },
     mode: {
       new: 0,
@@ -13,9 +14,12 @@ new Vue({
     ]
   },
   created () {
+    this.apiInfo.token = document.cookie.replace(/(?:(?:^|.*;\s*)hexSchoolToken\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+    if (this.apiInfo.token === '') {
+      window.location = 'login.html';
+    }
     axios.defaults.baseURL = `https://course-ec-api.hexschool.io/api/${this.apiInfo.UUID}/`
-    // axios.defaults.headers.common.Authorization = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1")
-    axios.defaults.headers.common.Authorization = `Bearer 81WlAKrdv3ddbWGMs7HFatXiwTMdyg66IwAteWA1HGKBqviHgCe1qlsrSkWc`
+    axios.defaults.headers.common.Authorization = `Bearer ${this.apiInfo.token}`
   },
   mounted () {
     this.getProductList()
