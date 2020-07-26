@@ -11,8 +11,8 @@ new Vue({
       edit: 1
     },
     modalMode: 0,
-    products: [
-    ]
+    products: [],
+    pagination: {}
   },
   created () {
     this.apiInfo.token = document.cookie.replace(/(?:(?:^|.*;\s*)hexSchoolToken\s*\=\s*([^;]*).*$)|^.*$/, "$1")
@@ -26,9 +26,15 @@ new Vue({
     this.getProductList()
   },
   methods: {
-    getProductList () {
-      axios.get(this.apiInfo.forProductList).then((result) => {
+    getProductList (page) {
+      if (!page) {
+        page = this.pagination.current_page || 1
+      }
+      axios.get(`${this.apiInfo.forProductList}?page=${page}`).then((result) => {
         this.products = result.data.data
+        this.pagination = result.data.meta.pagination
+      }).catch((err) => {
+        console.log(err)
       })
     },
     openProductModal (action, item) {
