@@ -167,6 +167,10 @@ Vue.component('product-editor', {
       $('#productModal').modal('hide')
     },
     uploadFile () {
+      if (this.$refs.file.files.length === 0) {
+        return
+      }
+
       this.fileUploading = true
 
       const fileReference = this.$refs.file.files[0]
