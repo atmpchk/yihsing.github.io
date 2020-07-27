@@ -135,6 +135,7 @@ Vue.component('product-editor', {
     prepareProduct (id) {
       axios.get(`${this.apiInfo.forSingleProduct}/${id}`).then((result) => {
         this.formData = result.data.data
+        this.formData.options = JSON.parse(result.data.data.options)
       }).catch((err) => {
         console.log(err)
       })
@@ -148,6 +149,7 @@ Vue.component('product-editor', {
       }
     },
     newProduct () {
+      this.formData.options = JSON.stringify(this.formData.options)
       axios.post(this.apiInfo.forSingleProduct, this.formData).then(() => {
         this.$emit('refresh-product-list')
         this.hideSelf()
@@ -156,6 +158,7 @@ Vue.component('product-editor', {
       })
     },
     editProduct () {
+      this.formData.options = JSON.stringify(this.formData.options)
       axios.patch(`${this.apiInfo.forSingleProduct}/${this.formData.id}`, this.formData).then(() => {
         this.$emit('refresh-product-list')
         this.hideSelf()
