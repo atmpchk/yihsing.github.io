@@ -4,7 +4,7 @@ new Vue({
     apiInfo: {
       UUID: '840d218c-ef17-4e49-90d3-cfef6170a5e5',
       token: '',
-      forProductList: '/ec/products'
+      forProducts: '/ec/products'
     },
     products: [],
     isLoading: false,
@@ -15,15 +15,15 @@ new Vue({
     axios.defaults.baseURL = `https://course-ec-api.hexschool.io/api/${this.apiInfo.UUID}/`
   },
   mounted () {
-    this.getProductList()
+    this.getProducts()
   },
   methods: {
-    getProductList (page) {
+    getProducts (page) {
       if (!page) {
         page = this.pagination.current_page || 1
       }
       this.isLoading = true
-      axios.get(`${this.apiInfo.forProductList}?page=${page}`).then((result) => {
+      axios.get(`${this.apiInfo.forProducts}?page=${page}`).then((result) => {
         this.products = result.data.data
         this.pagination = result.data.meta.pagination
         this.isLoading = false
@@ -32,8 +32,8 @@ new Vue({
         console.log(err)
       })
     },
-    onCancelLoading () {
-      console.log('User cancelled the loader.')
+    viewCart () {
+      window.location = 'cart.html'
     }
   }
 })

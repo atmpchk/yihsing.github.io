@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+  <title>Cart</title>
+</head>
+<body>
+  <div id="app" class="container">
+    <loading :active.sync="isLoading"
+      :is-full-page="isFullPageLoading">
+    </loading>
+    <div class="text-right mt-4">
+      <button class="btn btn-danger" @click="openDeleteCartModal">
+        刪除整份購物清單
+      </button>
+    </div>
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th class="text-center">產品名稱</th>
+          <th width="150" class="text-center">數量</th>
+          <th width="70" class="text-center">單位</th>
+          <th width="100" class="text-center">售價</th>
+          <th width="70" class="text-center">刪除</th>
+        </tr>
+        <tbody>
+          <tr v-for="item in cart" :key="item.product.id">
+            <td class="text-center align-middle">{{ item.product.title }}</td>
+            <td class="text-center">
+              <select class="form-control" v-model="item.quantity" @change="editItemAmount(item)">
+                <option v-for="n in 10" :key="'amount' + n">{{ n }}</option>
+              </select>
+            </td>
+            <td class="text-center align-middle">{{ item.product.unit }}</td>
+            <td class="text-right align-middle">{{ item.product.price | formatCurrency }}</td>
+            <td class="text-center align-middle">
+              <button class="btn btn-outline-danger btn-sm" @click="deleteItem(item)">
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td class="text-right">總計</td>
+            <td class="text-right" colspan="2">{{ priceSummary | formatCurrency }}</td>
+          </tr>
+        </tbody>
+      </thead>
+    </table>
+    <cart-remover ref="cartRemover" @refresh-cart="getCart" @set-loading="setLoading"></cart-remover>
+    <a href="javascript:void(0)" @click="viewProductList">回到產品列表</a>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+  <script src="formatter.js"></script>
+  <script src="loading.js"></script>
+  <script src="cartRemover.js"></script>
+  <script src="cart.js"></script>
+</body>
+</html>
