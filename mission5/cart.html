@@ -14,7 +14,7 @@
       :is-full-page="isFullPageLoading">
     </loading>
     <div class="text-right mt-4">
-      <button class="btn btn-danger" @click="openDeleteCartModal">
+      <button class="btn btn-danger" :disabled="cart.length === 0" @click="openDeleteCartModal">
         刪除整份購物清單
       </button>
     </div>
@@ -53,7 +53,7 @@
       </thead>
     </table>
     <cart-remover ref="cartRemover" @refresh-cart="getCart" @set-loading="setLoading"></cart-remover>
-    <a href="javascript:void(0)" @click="viewProductList">回到產品列表</a>
+    <a href="javascript:void(0)" @click="viewProducts">&#x25C1; 回到產品列表</a>
   </div>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

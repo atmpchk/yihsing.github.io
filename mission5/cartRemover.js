@@ -33,7 +33,7 @@ Vue.component('cart-remover', {
       axios.delete(this.apiInfo.forEntireCart).then(() => {
         this.$emit('refresh-cart')
         this.hideSelf()
-        window.location = 'productList.html'
+        window.location = 'products.html'
       }).catch((err) => {
         this.$emit('set-loading', false)
         console.log(err)

@@ -65,8 +65,8 @@ new Vue({
     openDeleteCartModal () {
       $('#deleteModal').modal('show')
     },
-    viewProductList () {
-      window.location = 'productList.html'
+    viewProducts () {
+      window.location = 'products.html'
     },
     setLoading (isLoading) {
       this.isLoading = isLoading
