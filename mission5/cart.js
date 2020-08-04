@@ -68,6 +68,9 @@ new Vue({
     viewProducts () {
       window.location = 'products.html'
     },
+    viewCheckOut () {
+      window.location = 'checkOut.html'
+    },
     setLoading (isLoading) {
       this.isLoading = isLoading
     }
