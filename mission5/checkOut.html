@@ -56,15 +56,16 @@
               </textarea>
             </div>
             <div class="text-right">
-              <button type="submit" class="btn btn-primary" :disabled="invalid">送出表單</button>
+              <button type="submit" class="btn btn-primary" :disabled="invalid">送出訂單</button>
             </div>
           </form>
         </validation-observer>
       </div>
     </div>
+    <check-out-finished ref="checkOutFinished"></check-out-finished>
     <div class="row my-4">
       <div class="col-12">
-        <a href="javascript:void(0)" @click="viewCart">&#x25C1; 回到購物車</a>
+        <a href="#" @click="viewCart">&#x25C1; 回到購物車</a>
       </div>
     </div>
   </div>
@@ -77,6 +78,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vee-validate/3.3.0/vee-validate.full.min.js"></script>
   <script src="loading.js"></script>
   <script type="module" src="veeValidate.js"></script>
+  <script src="checkOutFinished.js"></script>
   <script src="checkOut.js"></script>
 </body>
 </html>

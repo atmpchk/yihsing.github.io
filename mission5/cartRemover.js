@@ -1,6 +1,6 @@
 Vue.component('cart-remover', {
   template: `
-  <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+  <div id="cartRemoverModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cartRemoverModal" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-danger text-white">
@@ -40,7 +40,7 @@ Vue.component('cart-remover', {
       })
     },
     hideSelf () {
-      $('#deleteModal').modal('hide')
+      $('#cartRemoverModal').modal('hide')
     }
   }
 })

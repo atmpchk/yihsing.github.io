@@ -63,7 +63,7 @@ new Vue({
       })
     },
     openDeleteCartModal () {
-      $('#deleteModal').modal('show')
+      $('#cartRemoverModal').modal('show')
     },
     viewProducts () {
       window.location = 'products.html'

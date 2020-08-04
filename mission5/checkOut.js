@@ -37,6 +37,7 @@ new Vue({
       this.isLoading = true
       axios.post(this.apiInfo.forOrder, this.formData).then((result) => {
         this.isLoading = false
+        $('#checkOutFinishedModal').modal('show')
       }).catch((err) => {
         this.isLoading = false
         console.log(err)
