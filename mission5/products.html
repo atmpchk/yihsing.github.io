@@ -14,7 +14,7 @@
     </loading>
     <div class="row mt-4">
       <div class="col-md-4 mb-4" v-for="product in products" :key="product.id">
-        <product :product="product"></product>
+        <product :product="product" :in-cart="isInCart(product)" @put-to-cart="putToCart"></product>
       </div>
     </div>
     <div class="row my-4">
