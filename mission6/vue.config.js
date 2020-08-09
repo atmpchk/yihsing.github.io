@@ -1,3 +1,5 @@
 module.exports = {
-  publicPath: '/mission6/dist/'
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/javascriptTrainingCourse/mission6/dist/'
+    : '/'
 }
