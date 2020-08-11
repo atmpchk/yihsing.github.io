@@ -14,14 +14,15 @@
     </div>
     <div class="row my-4">
       <div class="col-12 text-right">
-        <a href="#" @click="viewCart">查看購物車 &#x25B7;</a>
+        <router-link to="/cart">查看購物車 &#x25B7;</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Product from '@/components/Product.vue';
+// @ is an alias to /src
+import Product from '@/views/attraction/Product.vue';
 
 export default {
   components: {
@@ -30,8 +31,6 @@ export default {
   data() {
     return {
       apiInfo: {
-        UUID: '840d218c-ef17-4e49-90d3-cfef6170a5e5',
-        token: '',
         forCart: '/ec/shopping',
         forProducts: '/ec/products',
       },
@@ -46,9 +45,6 @@ export default {
     isInCart() {
       return (product) => this.productIdsInCart.includes(product.id);
     },
-  },
-  created() {
-    this.axios.defaults.baseURL = `https://course-ec-api.hexschool.io/api/${this.apiInfo.UUID}/`;
   },
   mounted() {
     this.getProductIdsInCart();
@@ -85,9 +81,6 @@ export default {
     },
     updateDescription(product) {
       this.products.find((item) => item.id === product.id).description = product.description;
-    },
-    viewCart() {
-      window.location = 'cart.html';
     },
   },
 };
