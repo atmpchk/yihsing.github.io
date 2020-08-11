@@ -47,34 +47,33 @@ export default {
     },
   },
   mounted() {
-    this.getProductIdsInCart();
-    this.getProducts();
+    this.isLoading = true;
+    Promise.all([this.getProductIdsInCart(), this.getProducts()]).then((results) => {
+      this.setProductIdsInCart(results[0]);
+      this.setProducts(results[1]);
+      this.isLoading = false;
+    }).catch((reason) => {
+      this.isLoading = false;
+      console.log(reason);
+    });
   },
   methods: {
-    getProductIdsInCart(page) {
-      this.isLoading = true;
-      this.axios.get(`${this.apiInfo.forCart}?page=${this.givePage(page)}`).then((result) => {
-        this.productIdsInCart = result.data.data.map((item) => item.product.id);
-        this.isLoading = false;
-      }).catch((err) => {
-        this.isLoading = false;
-        console.log(err);
-      });
-    },
     givePage(page) {
       if (page) return page;
       return this.pagination.current_page || 1;
     },
+    getProductIdsInCart(page) {
+      return this.axios.get(`${this.apiInfo.forCart}?page=${this.givePage(page)}`);
+    },
+    setProductIdsInCart(result) {
+      this.productIdsInCart = result.data.data.map((item) => item.product.id);
+    },
     getProducts(page) {
-      this.isLoading = true;
-      this.axios.get(`${this.apiInfo.forProducts}?page=${this.givePage(page)}`).then((result) => {
-        this.products = result.data.data;
-        this.pagination = result.data.meta.pagination;
-        this.isLoading = false;
-      }).catch((err) => {
-        this.isLoading = false;
-        console.log(err);
-      });
+      return this.axios.get(`${this.apiInfo.forProducts}?page=${this.givePage(page)}`);
+    },
+    setProducts(result) {
+      this.products = result.data.data;
+      this.pagination = result.data.meta.pagination;
     },
     putToCart(id) {
       this.productIdsInCart.push(id);
