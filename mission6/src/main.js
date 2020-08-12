@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import formatter from './assets/js/formatter';
 import { setDefaultBaseUrlFromEnv } from './assets/js/vue/axios';
+import 'bootstrap';
 import './assets/js/jquery';
 import './assets/js/vue/loading';
 
