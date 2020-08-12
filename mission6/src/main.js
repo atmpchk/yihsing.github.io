@@ -6,6 +6,7 @@ import { setDefaultBaseUrlFromEnv } from './assets/js/vue/axios';
 import 'bootstrap';
 import './assets/js/jquery';
 import './assets/js/vue/loading';
+import './assets/js/vue/veeValidate';
 
 Vue.config.productionTip = false;
 
