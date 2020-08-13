@@ -12,7 +12,7 @@
       <div class="d-flex justify-content-around row">
         <button type="button"
           class="col-5 btn btn-outline-secondary btn-sm"
-          @click="getProduct(product)"
+          @click="routeToThisProduct(product)"
           :disabled="isLoading || product.description">
           <i v-if="isLoading" class="spinner-grow spinner-grow-sm"></i>
           詳細資訊
@@ -43,6 +43,13 @@ export default {
   },
   computed: {
   },
+  watch: {
+    $route(to) {
+      if (to.params.id === this.product.id) {
+        this.updateThisProduct();
+      }
+    },
+  },
   methods: {
     putToCart(product) {
       this.isLoading = true;
@@ -57,10 +64,13 @@ export default {
         console.log(err);
       });
     },
-    getProduct(product) {
+    routeToThisProduct(product) {
+      this.$router.push(`/products/${product.id}`);
+    },
+    updateThisProduct() {
       this.isLoading = true;
-      this.axios.get(`${this.apiInfo.forProduct}/${product.id}`).then((result) => {
-        this.$emit('update-description', result.data.data);
+      this.axios.get(`${this.apiInfo.forProduct}/${this.product.id}`).then((result) => {
+        this.product.description = result.data.data.description;
         this.isLoading = false;
       }).catch((err) => {
         this.isLoading = false;

@@ -7,8 +7,7 @@
       <div class="col-md-4 mb-4" v-for="product in products" :key="product.id">
         <product :product="product"
           :in-cart="isInCart(product)"
-          @put-to-cart="putToCart"
-          @update-description="updateDescription">
+          @put-to-cart="putToCart">
         </product>
       </div>
     </div>
@@ -77,9 +76,6 @@ export default {
     },
     putToCart(id) {
       this.productIdsInCart.push(id);
-    },
-    updateDescription(product) {
-      this.products.find((item) => item.id === product.id).description = product.description;
     },
   },
 };
