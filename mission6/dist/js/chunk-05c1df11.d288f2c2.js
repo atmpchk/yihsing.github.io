@@ -1,2 +1,2 @@
 (window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-05c1df11"],{"4fa0":function(n,t,e){"use strict";e.r(t);var a=function(){var n=this,t=n.$createElement,e=n._self._c||t;return e("div",{staticClass:"container",attrs:{id:"index"}},[n._v(" 首頁 ")])},c=[],i=(e("fed9"),e("2877")),s={},u=Object(i["a"])(s,a,c,!1,null,null,null);t["default"]=u.exports},"7d1a":function(n,t,e){},fed9:function(n,t,e){"use strict";var a=e("7d1a"),c=e.n(a);c.a}}]);
-//# sourceMappingURL=chunk-05c1df11.13b257b2.js.map
+//# sourceMappingURL=chunk-05c1df11.d288f2c2.js.map
