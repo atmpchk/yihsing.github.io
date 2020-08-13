@@ -9,7 +9,7 @@
 #nav {
   margin: auto;
   text-align: center;
-  padding: 30px;
+  padding: 30px 20px;
 
   a {
     font-weight: bold;

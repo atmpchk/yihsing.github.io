@@ -49,6 +49,44 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login.vue'),
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('../views/Admin.vue'),
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'admin.index',
+        component: () => import('../views/admin/Index.vue'),
+      },
+      {
+        path: 'products',
+        name: 'admin.products',
+        component: () => import('../views/admin/Products.vue'),
+      },
+      {
+        path: 'orders',
+        name: 'admin.orders',
+        component: () => import('../views/admin/Orders.vue'),
+      },
+      {
+        path: 'coupons',
+        name: 'admin.coupons',
+        component: () => import('../views/admin/Coupons.vue'),
+      },
+      {
+        path: 'pictures',
+        name: 'admin.pictures',
+        component: () => import('../views/admin/Pictures.vue'),
+      },
+    ],
+  },
   // {
   //   path: '/about',
   //   name: 'About',
@@ -61,6 +99,32 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+});
+
+function isAuthenticated() {
+  const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexSchoolToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+  if (token === '') {
+    return false;
+  }
+  return true;
+}
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    console.log('check auth');
+    if (!isAuthenticated()) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath },
+      });
+    } else {
+      next();
+    }
+  } else {
+    next(); // make sure to call next()
+  }
 });
 
 export default router;
