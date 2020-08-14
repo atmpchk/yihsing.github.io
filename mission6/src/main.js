@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import formatter from './assets/js/formatter';
-import { setDefaultBaseUrlFromEnv } from './assets/js/vue/axios';
+import { registerGlobally, setDefaultBaseUrlFromEnv } from './assets/js/vue/axios';
 import 'bootstrap';
 import './assets/js/jquery';
 import './assets/js/vue/loading';
@@ -10,6 +10,7 @@ import './assets/js/vue/veeValidate';
 
 Vue.config.productionTip = false;
 
+registerGlobally();
 setDefaultBaseUrlFromEnv();
 
 Vue.filter('formatCurrency', formatter);

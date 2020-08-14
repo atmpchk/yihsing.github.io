@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import cartRemover from '@/components/cartRemover.vue';
+import cartRemover from '@/components/CartRemover.vue';
 
 export default {
   components: {

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Attraction from '../views/Attraction.vue';
+import { setDefaultAuthorizationToken } from '../assets/js/vue/axios';
 
 Vue.use(VueRouter);
 
@@ -106,6 +107,7 @@ function isAuthenticated() {
   if (token === '') {
     return false;
   }
+  setDefaultAuthorizationToken(token);
   return true;
 }
 
@@ -113,7 +115,6 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    console.log('check auth');
     if (!isAuthenticated()) {
       next({
         path: '/login',

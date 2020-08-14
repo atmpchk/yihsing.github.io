@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { setDefaultAuthorizationToken } from '@/assets/js/vue/axios';
+
 export default {
   name: 'Login',
   data() {
@@ -60,6 +62,7 @@ export default {
       this.axios.post(this.apiInfo.forLogin, this.formData).then((res) => {
         const { token, expired } = res.data;
         document.cookie = `hexSchoolToken=${token};expires=${new Date(expired * 1000)}; path=/`;
+        setDefaultAuthorizationToken(token);
         this.$router.push(`${this.$route.query.redirect || '/admin'}`);
         this.isLoading = false;
       }).catch((err) => {
