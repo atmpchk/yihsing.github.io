@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-06f1fa1d"],{"0a09":function(n,t,e){"use strict";e.r(t);var a=function(){var n=this,t=n.$createElement,e=n._self._c||t;return e("div",{staticClass:"container",attrs:{id:"index"}},[n._v(" 請選擇相關管理功能 ")])},c=[],i=(e("6412"),e("2877")),s={},u=Object(i["a"])(s,a,c,!1,null,null,null);t["default"]=u.exports},6412:function(n,t,e){"use strict";var a=e("e453"),c=e.n(a);c.a},e453:function(n,t,e){}}]);
+//# sourceMappingURL=chunk-06f1fa1d.e4c7b8ed.js.map

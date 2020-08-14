@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-8c2611b8"],{"3ad8":function(n,t,a){},5651:function(n,t,a){"use strict";a.r(t);var e=function(){var n=this,t=n.$createElement,a=n._self._c||t;return a("div",{staticClass:"container",attrs:{id:"orders"}},[n._v(" 訂單管理 ")])},c=[],s=(a("b0ea"),a("2877")),r={},i=Object(s["a"])(r,e,c,!1,null,null,null);t["default"]=i.exports},b0ea:function(n,t,a){"use strict";var e=a("3ad8"),c=a.n(e);c.a}}]);
+//# sourceMappingURL=chunk-8c2611b8.780712c8.js.map

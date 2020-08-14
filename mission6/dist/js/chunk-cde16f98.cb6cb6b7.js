@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-cde16f98"],{"51df":function(n,t,a){},aa0e:function(n,t,a){"use strict";var e=a("51df"),c=a.n(e);c.a},d0a3:function(n,t,a){"use strict";a.r(t);var e=function(){var n=this,t=n.$createElement,a=n._self._c||t;return a("div",{staticClass:"container",attrs:{id:"coupons"}},[n._v(" 優惠券管理 ")])},c=[],s=(a("aa0e"),a("2877")),u={},i=Object(s["a"])(u,e,c,!1,null,null,null);t["default"]=i.exports}}]);
+//# sourceMappingURL=chunk-cde16f98.cb6cb6b7.js.map

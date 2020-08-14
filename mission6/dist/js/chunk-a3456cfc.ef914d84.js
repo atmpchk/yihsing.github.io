@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-a3456cfc"],{"81fc":function(c,n,t){},c393:function(c,n,t){"use strict";t.r(n);var e=function(){var c=this,n=c.$createElement,t=c._self._c||n;return t("div",{staticClass:"container",attrs:{id:"pictures"}},[c._v(" 圖片資源管理 ")])},s=[],a=(t("cc0c"),t("2877")),i={},u=Object(a["a"])(i,e,s,!1,null,null,null);n["default"]=u.exports},cc0c:function(c,n,t){"use strict";var e=t("81fc"),s=t.n(e);s.a}}]);
+//# sourceMappingURL=chunk-a3456cfc.ef914d84.js.map
