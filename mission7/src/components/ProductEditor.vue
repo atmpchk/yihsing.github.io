@@ -202,7 +202,7 @@ export default {
       this.$emit('set-loading', true);
       this.axios.post(this.apiInfo.forSingleProduct, this.formData).then(() => {
         this.$emit('set-loading', false);
-        this.$emit('refresh-products');
+        this.$emit('refresh-content');
         this.hideSelf();
       }).catch((err) => {
         this.$emit('set-loading', false);
@@ -214,7 +214,7 @@ export default {
       this.$emit('set-loading', true);
       this.axios.patch(`${this.apiInfo.forSingleProduct}/${this.formData.id}`, this.formData).then(() => {
         this.$emit('set-loading', false);
-        this.$emit('refresh-products');
+        this.$emit('refresh-content');
         this.hideSelf();
       }).catch((err) => {
         this.$emit('set-loading', false);

@@ -45,7 +45,7 @@ export default {
       this.$emit('set-loading', true);
       this.axios.delete(`${this.apiInfo.forSingleProduct}/${this.toBeDeleteProduct.id}`).then(() => {
         this.$emit('set-loading', false);
-        this.$emit('refresh-products');
+        this.$emit('refresh-content');
         this.hideSelf();
       }).catch((err) => {
         this.$emit('set-loading', false);

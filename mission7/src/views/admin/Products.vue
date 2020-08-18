@@ -45,15 +45,15 @@
     </table>
     <product-editor ref="productEditor"
       @set-loading="setLoading"
-      @refresh-products="getProducts"
+      @refresh-content="getProducts"
       :modal-mode="modalMode">
     </product-editor>
     <product-remover ref="productRemover"
       @set-loading="setLoading"
-      @refresh-products="getProducts">
+      @refresh-content="getProducts">
     </product-remover>
     <pagination ref="pagination"
-      @refresh-products="getProducts"
+      @refresh-content="getProducts"
       :pagination="pagination">
     </pagination>
   </div>
