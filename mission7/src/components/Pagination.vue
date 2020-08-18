@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     goToPage(page) {
-      this.$emit('refresh-product-list', page);
+      this.$emit('refresh-products', page);
     },
   },
 };

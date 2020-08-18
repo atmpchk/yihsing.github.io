@@ -45,15 +45,15 @@
     </table>
     <product-editor ref="productEditor"
       @set-loading="setLoading"
-      @refresh-product-list="getProductList"
+      @refresh-products="getProducts"
       :modal-mode="modalMode">
     </product-editor>
     <product-remover ref="productRemover"
       @set-loading="setLoading"
-      @refresh-product-list="getProductList">
+      @refresh-products="getProducts">
     </product-remover>
     <pagination ref="pagination"
-      @refresh-product-list="getProductList"
+      @refresh-products="getProducts"
       :pagination="pagination">
     </pagination>
   </div>
@@ -73,7 +73,7 @@ export default {
   data() {
     return {
       apiInfo: {
-        forProductList: '/admin/ec/products',
+        forProducts: '/admin/ec/products',
       },
       mode: {
         new: 0,
@@ -87,16 +87,16 @@ export default {
     };
   },
   mounted() {
-    this.getProductList();
+    this.getProducts();
   },
   methods: {
     givePage(page) {
       if (page) return page;
       return this.pagination.current_page || 1;
     },
-    getProductList(page) {
+    getProducts(page) {
       this.isLoading = true;
-      this.axios.get(`${this.apiInfo.forProductList}?page=${this.givePage(page)}`).then((result) => {
+      this.axios.get(`${this.apiInfo.forProducts}?page=${this.givePage(page)}`).then((result) => {
         this.products = result.data.data;
         this.pagination = result.data.meta.pagination;
         this.isLoading = false;
