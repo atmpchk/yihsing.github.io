@@ -29,11 +29,9 @@
 
 <script>
 export default {
+  props: ['api'],
   data() {
     return {
-      apiInfo: {
-        forSingleProduct: '/admin/ec/product',
-      },
       toBeDeleteItem: {},
     };
   },
@@ -43,7 +41,7 @@ export default {
     },
     deleteItem() {
       this.$emit('set-loading', true);
-      this.axios.delete(`${this.apiInfo.forSingleProduct}/${this.toBeDeleteItem.id}`).then(() => {
+      this.axios.delete(`${this.api}/${this.toBeDeleteItem.id}`).then(() => {
         this.$emit('set-loading', false);
         this.$emit('refresh-content');
         this.hideSelf();

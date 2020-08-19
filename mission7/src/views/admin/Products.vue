@@ -50,7 +50,8 @@
     </product-editor>
     <remover ref="productRemover"
       @set-loading="setLoading"
-      @refresh-content="getProducts">
+      @refresh-content="getProducts"
+      :api="apiInfo.forSingleProduct">
     </remover>
     <pagination ref="pagination"
       @refresh-content="getProducts"
@@ -74,6 +75,7 @@ export default {
     return {
       apiInfo: {
         forProducts: '/admin/ec/products',
+        forSingleProduct: '/admin/ec/product',
       },
       mode: {
         new: 0,
