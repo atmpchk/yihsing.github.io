@@ -35,7 +35,7 @@
                 編輯
               </button>
               <button class="btn btn-outline-danger btn-sm"
-                @click="openProductRemoverModal(item)">
+                @click="openRemoverModal(item)">
                 刪除
               </button>
             </div>
@@ -48,10 +48,10 @@
       @refresh-content="getProducts"
       :modal-mode="modalMode">
     </product-editor>
-    <product-remover ref="productRemover"
+    <remover ref="productRemover"
       @set-loading="setLoading"
       @refresh-content="getProducts">
-    </product-remover>
+    </remover>
     <pagination ref="pagination"
       @refresh-content="getProducts"
       :pagination="pagination">
@@ -61,13 +61,13 @@
 
 <script>
 import ProductEditor from '@/components/ProductEditor.vue';
-import ProductRemover from '@/components/ProductRemover.vue';
+import Remover from '@/components/Remover.vue';
 import Pagination from '@/components/Pagination.vue';
 
 export default {
   components: {
     ProductEditor,
-    ProductRemover,
+    Remover,
     Pagination,
   },
   data() {
@@ -125,10 +125,10 @@ export default {
       this.isLoading = false;
       $('#productModal').modal('show');
     },
-    openProductRemoverModal(item) {
-      this.$refs.productRemover.setToBeDeleteProduct(item);
+    openRemoverModal(item) {
+      this.$refs.productRemover.setToBeDeleteItem(item);
 
-      $('#productRemoverModal').modal('show');
+      $('#removerModal').modal('show');
     },
     setLoading(toggle) {
       this.isLoading = toggle;

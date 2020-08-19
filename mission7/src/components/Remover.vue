@@ -1,9 +1,9 @@
 <template>
-  <div id="productRemoverModal"
+  <div id="removerModal"
     class="modal fade"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="productRemoverModal"
+    aria-labelledby="removerModal"
     aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
@@ -15,7 +15,7 @@
         </div>
         <div class="modal-body">
           確認刪除
-          <strong>{{ toBeDeleteProduct.title }}</strong>
+          <strong>{{ toBeDeleteItem.title }}</strong>
           此項產品？
         </div>
         <div class="modal-footer">
@@ -34,16 +34,16 @@ export default {
       apiInfo: {
         forSingleProduct: '/admin/ec/product',
       },
-      toBeDeleteProduct: {},
+      toBeDeleteItem: {},
     };
   },
   methods: {
-    setToBeDeleteProduct(product) {
-      this.toBeDeleteProduct = product;
+    setToBeDeleteItem(item) {
+      this.toBeDeleteItem = item;
     },
     deleteProduct() {
       this.$emit('set-loading', true);
-      this.axios.delete(`${this.apiInfo.forSingleProduct}/${this.toBeDeleteProduct.id}`).then(() => {
+      this.axios.delete(`${this.apiInfo.forSingleProduct}/${this.toBeDeleteItem.id}`).then(() => {
         this.$emit('set-loading', false);
         this.$emit('refresh-content');
         this.hideSelf();
@@ -53,7 +53,7 @@ export default {
       });
     },
     hideSelf() {
-      $('#productRemoverModal').modal('hide');
+      $('#removerModal').modal('hide');
     },
   },
 };
