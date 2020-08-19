@@ -20,7 +20,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-danger" @click="deleteProduct">確認刪除</button>
+          <button type="button" class="btn btn-danger" @click="deleteItem">確認刪除</button>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@ export default {
     setToBeDeleteItem(item) {
       this.toBeDeleteItem = item;
     },
-    deleteProduct() {
+    deleteItem() {
       this.$emit('set-loading', true);
       this.axios.delete(`${this.apiInfo.forSingleProduct}/${this.toBeDeleteItem.id}`).then(() => {
         this.$emit('set-loading', false);
