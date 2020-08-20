@@ -15,7 +15,7 @@
           <th width="120" class="text-center">代碼</th>
           <th width="120" class="text-center">折扣 %</th>
           <th width="100" class="text-center">是否開放</th>
-          <th width="120" class="text-center">編輯</th>
+          <th width="120" class="text-center">操作</th>
         </tr>
       </thead>
       <tbody>
@@ -97,7 +97,7 @@ export default {
     },
     getCoupons(page) {
       this.isLoading = true;
-      this.axios.get(`${this.apiInfo.forCoupons}?page=${this.givePage(page)}&paged=1`).then((result) => {
+      this.axios.get(`${this.apiInfo.forCoupons}?page=${this.givePage(page)}`).then((result) => {
         this.coupons = result.data.data;
         this.pagination = result.data.meta.pagination;
         this.isLoading = false;

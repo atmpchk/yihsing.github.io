@@ -16,7 +16,7 @@
           <th width="120" class="text-center">原價</th>
           <th width="120" class="text-center">售價</th>
           <th width="100" class="text-center">是否啟用</th>
-          <th width="120" class="text-center">編輯</th>
+          <th width="120" class="text-center">操作</th>
         </tr>
       </thead>
       <tbody>

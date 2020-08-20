@@ -82,9 +82,9 @@ const routes = [
         component: () => import('../views/admin/Coupons.vue'),
       },
       {
-        path: 'pictures',
-        name: 'admin.pictures',
-        component: () => import('../views/admin/Pictures.vue'),
+        path: 'storages',
+        name: 'admin.storages',
+        component: () => import('../views/admin/Storages.vue'),
       },
     ],
   },

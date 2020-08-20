@@ -16,7 +16,7 @@
             <router-link to="/admin/products">產品管理</router-link> |
             <router-link to="/admin/orders">訂單管理</router-link> |
             <router-link to="/admin/coupons">優惠券管理</router-link> |
-            <router-link to="/admin/pictures">圖片資源管理</router-link> |
+            <router-link to="/admin/storages">圖片資源管理</router-link> |
             <a href="#" @click.prevent="logout">登出</a>
           </div>
         </div>
