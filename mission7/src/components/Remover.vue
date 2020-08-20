@@ -8,7 +8,7 @@
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title">刪除產品</h5>
+          <h5 class="modal-title">{{`刪除${itemGeneralName}`}}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -16,7 +16,7 @@
         <div class="modal-body">
           確認刪除
           <strong>{{ toBeDeleteItem.title }}</strong>
-          此項產品？
+          {{`此項${itemGeneralName}？`}}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  props: ['api'],
+  props: ['api', 'itemGeneralName'],
   data() {
     return {
       toBeDeleteItem: {},

@@ -51,7 +51,8 @@
     <remover ref="productRemover"
       @set-loading="setLoading"
       @refresh-content="getProducts"
-      :api="apiInfo.forSingleProduct">
+      :api="apiInfo.forSingleProduct"
+      :item-general-name="'產品'">
     </remover>
     <pagination ref="pagination"
       @refresh-content="getProducts"

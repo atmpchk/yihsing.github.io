@@ -5,7 +5,7 @@
     role="dialog"
     aria-labelledby="couponModal"
     aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-info text-white">
           <h5 class="modal-title">{{ modalMode === mode.new ? '新增優惠卷' : '編輯優惠卷' }}</h5>

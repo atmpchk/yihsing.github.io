@@ -49,7 +49,8 @@
     <remover ref="couponRemover"
       @set-loading="setLoading"
       @refresh-content="getCoupons"
-      :api="apiInfo.forSingleCoupon">
+      :api="apiInfo.forSingleCoupon"
+      :item-general-name="'優惠券'">
     </remover>
     <pagination ref="pagination"
       @refresh-content="getCoupons"
