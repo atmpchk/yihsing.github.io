@@ -11,7 +11,6 @@
           <th width="120" class="text-center">付款方式</th>
           <th width="120" class="text-center">應付款項</th>
           <th width="120" class="text-center">是否付款</th>
-          <th width="120" class="text-center">操作</th>
         </tr>
       </thead>
       <tbody>
@@ -36,22 +35,10 @@
                 <span v-else>未付款</span>
               </label>
             </div>
-          <td class="text-center">
-            <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm"
-                @click="openOrderModal('edit', item)">
-                編輯
-              </button>
-            </div>
           </td>
         </tr>
       </tbody>
     </table>
-    <!-- <order-editor ref="orderEditor"
-      @set-loading="setLoading"
-      @refresh-content="getOrders"
-      :modal-mode="modalMode">
-    </order-editor> -->
     <pagination ref="pagination"
       @refresh-content="getOrders"
       :pagination="pagination">
@@ -60,7 +47,6 @@
 </template>
 
 <script>
-// import OrderEditor from '@/components/OrderEditor.vue';
 import Pagination from '@/components/Pagination.vue';
 
 export default {
@@ -94,7 +80,7 @@ export default {
     },
     getOrders(page) {
       this.isLoading = true;
-      this.axios.get(`${this.apiInfo.forOrders}?page=${this.givePage(page)}&paged=3`).then((result) => {
+      this.axios.get(`${this.apiInfo.forOrders}?page=${this.givePage(page)}&paged=10`).then((result) => {
         this.orders = result.data.data;
         this.pagination = result.data.meta.pagination;
         this.isLoading = false;
