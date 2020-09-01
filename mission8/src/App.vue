@@ -5,7 +5,7 @@
 </template>
 
 <style lang="scss">
-@import '@/assets/scss/main';
+@import '@/assets/scss/all';
 #nav {
   margin: auto;
   text-align: center;
