@@ -100,6 +100,7 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+  linkActiveClass: 'active',
 });
 
 function isAuthenticated() {
