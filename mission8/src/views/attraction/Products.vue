@@ -1,19 +1,28 @@
 <template>
-  <div id="products" class="container">
-    <loading :active.sync="isLoading"
-      :is-full-page="isFullPageLoading">
-    </loading>
-    <div class="row mt-4">
-      <div class="col-md-4 mb-4" v-for="product in products" :key="product.id">
-        <product :product="product"
-          :in-cart="isInCart(product)"
-          @put-to-cart="putToCart">
-        </product>
-      </div>
+  <div>
+    <div class="position-relative d-flex align-items-center justify-content-center"
+      style="min-height: 400px;"
+    >
+      <div class="position-absolute landing-img"></div>
+      <h2 class="font-weight-bold">精選產品</h2>
     </div>
-    <div class="row my-4">
-      <div class="col-12 text-right">
-        <router-link to="/cart">查看購物車 &#x25B7;</router-link>
+
+    <div id="products" class="container">
+      <loading :active.sync="isLoading"
+        :is-full-page="isFullPageLoading">
+      </loading>
+      <div class="row mt-4">
+        <div class="col-md-4 mb-4" v-for="product in products" :key="product.id">
+          <product :product="product"
+            :in-cart="isInCart(product)"
+            @put-to-cart="putToCart">
+          </product>
+        </div>
+      </div>
+      <div class="row my-4">
+        <div class="col-12 text-right">
+          <router-link to="/cart">查看購物車 &#x25B7;</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -81,5 +90,14 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.landing-img {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url(https://hexschool-api.s3.us-west-2.amazonaws.com/custom/9lkw3NZPCM09C05IruMP7z7AeuYRhImFry8QFtjOzljjeTMo92kGrCu6GSe4ijurmxDxI4hZOj9r0ftiljsBaWufPpvUYNyLuExnwX8KvrVGKqyzbjIKaoTjrhnUDLgE.png);
+  background-position: center center;
+  opacity: 0.25;
+}
 </style>

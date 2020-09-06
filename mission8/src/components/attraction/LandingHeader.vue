@@ -36,7 +36,7 @@
           <p class="text-muted mb-0">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod.
           </p>
-          <button class="btn btn-dark rounded-0 mt-6">Lorem ipsum.</button>
+          <button class="btn btn-dark rounded-0 mt-6" @click="viewProducts">選購產品</button>
         </div>
       </div>
     </div>
@@ -46,15 +46,20 @@
 <script>
 export default {
   name: 'LandingHeader',
+  methods: {
+    viewProducts() {
+      this.$router.push('/products');
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .landing-img {
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-image: url(https://hexschool-api.s3.us-west-2.amazonaws.com/custom/9lkw3NZPCM09C05IruMP7z7AeuYRhImFry8QFtjOzljjeTMo92kGrCu6GSe4ijurmxDxI4hZOj9r0ftiljsBaWufPpvUYNyLuExnwX8KvrVGKqyzbjIKaoTjrhnUDLgE.png);
   background-position: center center;
   opacity: 0.15;
