@@ -1,6 +1,6 @@
 <template>
   <div class="h-100 d-flex flex-column">
-    <div class="content">
+    <div class="attraction-body">
       <landing-header v-if="$route.path === '/'"></landing-header>
       <common-header v-else></common-header>
       <router-view/>
@@ -24,8 +24,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.content {
+<style lang="scss">
+.attraction-body {
   flex: 1 0 auto;
 }
+
+.cart-badge {
+  display: inline-block;
+  font-size: 0.6em;
+  margin-top: 0em;
+  margin-left: -0.4em;
+  position: absolute;
+}
+
 </style>

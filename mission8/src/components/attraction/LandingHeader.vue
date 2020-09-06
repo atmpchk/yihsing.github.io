@@ -26,6 +26,7 @@
             </router-link>
             <router-link to="/cart" class="nav-item nav-link mr-4">
               <i class="fas fa-shopping-cart"></i>
+              <div class="badge badge-pill badge-danger cart-badge">9</div>
             </router-link>
           </div>
         </div>
