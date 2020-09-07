@@ -60,8 +60,8 @@
 </template>
 
 <script>
-import CouponEditor from '@/components/CouponEditor.vue';
-import Remover from '@/components/Remover.vue';
+import CouponEditor from '@/components/admin/CouponEditor.vue';
+import Remover from '@/components/admin/Remover.vue';
 import Pagination from '@/components/Pagination.vue';
 
 export default {

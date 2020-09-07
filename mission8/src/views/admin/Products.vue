@@ -62,8 +62,8 @@
 </template>
 
 <script>
-import ProductEditor from '@/components/ProductEditor.vue';
-import Remover from '@/components/Remover.vue';
+import ProductEditor from '@/components/admin/ProductEditor.vue';
+import Remover from '@/components/admin/Remover.vue';
 import Pagination from '@/components/Pagination.vue';
 
 export default {

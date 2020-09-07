@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import Remover from '@/components/Remover.vue';
+import Remover from '@/components/admin/Remover.vue';
 import Pagination from '@/components/Pagination.vue';
 
 export default {
