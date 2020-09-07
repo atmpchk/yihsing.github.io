@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <loading :active.sync="isLoading"
-        :is-full-page="isFullPageLoading">
-      </loading>
+      <loading :active.sync="isLoading" :is-full-page="isFullPageLoading"></loading>
       <div class="row">
         <div class="col-md-3">
           <div id="nav">

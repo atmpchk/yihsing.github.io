@@ -1,8 +1,6 @@
 <template>
   <div id="login" class="container mt-4">
-    <loading :active.sync="isLoading"
-      :is-full-page="isFullPageLoading">
-    </loading>
+    <loading :active.sync="isLoading" :is-full-page="isFullPageLoading"></loading>
     <form class="form-sign-in" @submit.prevent="signIn">
       <h3 class="mb-3 font-weight-normal">請先登入</h3>
       <div class="form-group">

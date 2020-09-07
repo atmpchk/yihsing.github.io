@@ -2,9 +2,7 @@
   <div id="checkOut" class="container">
     <div class="row justify-content-center my-4">
       <div class="col-md-6">
-        <loading :active.sync="isLoading"
-          :is-full-page="isFullPageLoading">
-        </loading>
+        <loading :active.sync="isLoading" :is-full-page="isFullPageLoading"></loading>
         <validation-observer v-slot="{ invalid, handleSubmit }">
           <form @submit.prevent="handleSubmit(submitForm)">
             <div class="form-group">

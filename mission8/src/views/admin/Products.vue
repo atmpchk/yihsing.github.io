@@ -1,8 +1,6 @@
 <template>
   <div id="products" class="container">
-    <loading :active.sync="isLoading"
-      :is-full-page="isFullPageLoading">
-    </loading>
+    <loading :active.sync="isLoading" :is-full-page="isFullPageLoading"></loading>
     <div class="text-right mt-4">
       <button class="btn btn-primary" @click="openProductModal('new')">
         建立新的產品

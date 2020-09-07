@@ -1,8 +1,6 @@
 <template>
   <div id="cart" class="container">
-    <loading :active.sync="isLoading"
-      :is-full-page="isFullPageLoading">
-    </loading>
+    <loading :active.sync="isLoading" :is-full-page="isFullPageLoading"></loading>
     <div class="text-right mt-4">
       <button class="btn btn-danger" :disabled="cart.length === 0" @click="openDeleteCartModal">
         刪除整份購物清單

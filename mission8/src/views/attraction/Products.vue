@@ -1,8 +1,6 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"
-      :is-full-page="isFullPageLoading">
-    </loading>
+    <loading :active.sync="isLoading" :is-full-page="isFullPageLoading"></loading>
     <div class="position-relative d-flex align-items-center justify-content-center"
       style="min-height: 400px;"
     >

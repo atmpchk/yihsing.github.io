@@ -1,8 +1,6 @@
 <template>
   <div class="h-100 d-flex flex-column">
-    <loading :active.sync="isLoading"
-      :is-full-page="isFullPageLoading">
-    </loading>
+    <loading :active.sync="isLoading" :is-full-page="isFullPageLoading"></loading>
     <div class="attraction-body">
       <app-header></app-header>
       <router-view/>

@@ -1,8 +1,6 @@
 <template>
   <div id="orders" class="container">
-    <loading :active.sync="isLoading"
-      :is-full-page="isFullPageLoading">
-    </loading>
+    <loading :active.sync="isLoading" :is-full-page="isFullPageLoading"></loading>
     <table class="table mt-4">
       <thead>
         <tr>
