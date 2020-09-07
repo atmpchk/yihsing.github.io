@@ -1,8 +1,10 @@
 <template>
   <div class="h-100 d-flex flex-column">
+    <loading :active.sync="isLoading"
+      :is-full-page="isFullPageLoading">
+    </loading>
     <div class="attraction-body">
-      <landing-header v-if="$route.path === '/'"></landing-header>
-      <common-header v-else></common-header>
+      <app-header></app-header>
       <router-view/>
     </div>
     <app-footer class="flex-shrink-0"></app-footer>
@@ -10,16 +12,53 @@
 </template>
 
 <script>
-import LandingHeader from '@/components/attraction/LandingHeader.vue';
-import CommonHeader from '@/components/attraction/CommonHeader.vue';
+import AppHeader from '@/components/attraction/Header.vue';
 import AppFooter from '@/components/attraction/Footer.vue';
 
 export default {
   name: 'Attraction',
   components: {
-    LandingHeader,
-    CommonHeader,
+    AppHeader,
     AppFooter,
+  },
+  data() {
+    return {
+      apiInfo: {
+        forCart: '/ec/shopping',
+        forProducts: '/ec/products',
+      },
+      productIdsInCart: [],
+      products: [],
+      isLoading: false,
+      isFullPageLoading: true,
+      pagination: {},
+    };
+  },
+  created() {
+    this.isLoading = true;
+    this.getProductIdsInCart().then((result) => {
+      this.setProductIdsInCart(result);
+      this.broadcastProductInCartCount();
+      this.isLoading = false;
+    }).catch((reason) => {
+      this.isLoading = false;
+      console.log(reason);
+    });
+  },
+  methods: {
+    givePage(page) {
+      if (page) return page;
+      return this.pagination.current_page || 1;
+    },
+    getProductIdsInCart(page) {
+      return this.axios.get(`${this.apiInfo.forCart}?page=${this.givePage(page)}`);
+    },
+    setProductIdsInCart(result) {
+      this.productIdsInCart = result.data.data.map((item) => item.product.id);
+    },
+    broadcastProductInCartCount() {
+      this.$bus.$emit('productInCartCount', this.productIdsInCart.length);
+    },
   },
 };
 </script>
@@ -28,13 +67,4 @@ export default {
 .attraction-body {
   flex: 1 0 auto;
 }
-
-.cart-badge {
-  display: inline-block;
-  font-size: 0.6em;
-  margin-top: 0em;
-  margin-left: -0.4em;
-  position: absolute;
-}
-
 </style>

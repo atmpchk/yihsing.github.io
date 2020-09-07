@@ -1,16 +1,16 @@
 <template>
   <div>
+    <loading :active.sync="isLoading"
+      :is-full-page="isFullPageLoading">
+    </loading>
     <div class="position-relative d-flex align-items-center justify-content-center"
       style="min-height: 400px;"
     >
-      <div class="position-absolute landing-img"></div>
+      <div class="position-absolute jumbotron-img"></div>
       <h2 class="font-weight-bold">精選產品</h2>
     </div>
 
     <div id="products" class="container">
-      <loading :active.sync="isLoading"
-        :is-full-page="isFullPageLoading">
-      </loading>
       <div class="row mt-4">
         <div class="col-md-4 mb-4" v-for="product in products" :key="product.id">
           <product :product="product"
@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.landing-img {
+.jumbotron-img {
   top: 0;
   bottom: 0;
   left: 0;
