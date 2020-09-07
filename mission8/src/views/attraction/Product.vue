@@ -1,5 +1,18 @@
 <template>
-  <div class="card border-0 shadow-sm">
+  <div class="card border-0 mb-4 position-relative position-relative">
+    <img :src="product.imageUrl[0]" class="card-img-top rounded-0" alt="...">
+    <a href="#" class="text-dark">
+      <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
+    </a>
+    <div class="card-body p-0">
+      <h4 class="mb-0 mt-3"><a href="./detail.html">{{ product.title }}</a></h4>
+      <p class="card-text mb-0">
+        {{ product.price | formatCurrency }}
+      </p>
+      <p class="text-muted mt-3"></p>
+    </div>
+  </div>
+  <!-- <div class="card border-0 shadow-sm">
     <img :src="product.imageUrl[0]" class="card-img-top">
     <div class="card-body">
       <span class="badge badge-secondary float-right ml-2">{{ product.category }}</span>
@@ -26,7 +39,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>

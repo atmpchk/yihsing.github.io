@@ -8,18 +8,37 @@
       <h2 class="font-weight-bold">精選產品</h2>
     </div>
 
-    <div id="products" class="container">
-      <div class="row mt-4">
-        <div class="col-md-4 mb-4" v-for="product in products" :key="product.id">
-          <product :product="product"
-            :in-cart="isInCart(product)"
-            @put-to-cart="putToCart">
-          </product>
+    <div class="container mt-md-5 mt-3 mb-7">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="list-group list-group-flush">
+            <button type="button"
+              class="list-group-item list-group-item-action border-top"
+              :class="{ active: currGroup === '*'}"
+              @click="switchGroup('*')"
+            >
+              所有產品
+            </button>
+            <button type="button"
+              class="list-group-item list-group-item-action"
+              v-for="(key, index) in Object.keys(groupedProducts)"
+              :key="key"
+              :class="listGroupStyles(index)"
+              @click="switchGroup(index)"
+            >
+              {{ key }}
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="row my-4">
-        <div class="col-12 text-right">
-          <router-link to="/cart">查看購物車 &#x25B7;</router-link>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-6" v-for="product in filteredProducts" :key="product.id">
+              <product :product="product"
+                :in-cart="isInCart(product)"
+                @put-to-cart="putToCart">
+              </product>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -29,6 +48,7 @@
 <script>
 // @ is an alias to /src
 import Product from '@/views/attraction/Product.vue';
+import arrayUtils from '@/assets/js/arrayUtils';
 
 export default {
   components: {
@@ -42,6 +62,7 @@ export default {
       },
       productIdsInCart: [],
       products: [],
+      currGroup: '*',
       isLoading: false,
       isFullPageLoading: true,
       pagination: {},
@@ -50,6 +71,20 @@ export default {
   computed: {
     isInCart() {
       return (product) => this.productIdsInCart.includes(product.id);
+    },
+    groupedProducts() {
+      return arrayUtils(this.products, 'category');
+    },
+    filteredProducts() {
+      return this.currGroup === '*'
+        ? this.products
+        : this.groupedProducts[Object.keys(this.groupedProducts)[this.currGroup]];
+    },
+    listGroupStyles() {
+      return (index) => ({
+        active: index === this.currGroup,
+        'border-bottom': index === Object.keys(this.groupedProducts).length - 1,
+      });
     },
   },
   mounted() {
@@ -64,6 +99,9 @@ export default {
     });
   },
   methods: {
+    switchGroup(index) {
+      this.currGroup = index;
+    },
     givePage(page) {
       if (page) return page;
       return this.pagination.current_page || 1;
