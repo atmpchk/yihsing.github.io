@@ -36,9 +36,9 @@
         </nav>
         <div class="row justify-content-center my-auto">
           <div class="col-md-4 text-center">
-            <h2>Lorem ipsum.</h2>
+            <h2>歡迎回來 Sweety</h2>
             <p class="text-muted mb-0">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod.
+              有您的造訪是我們最大的榮幸
             </p>
             <button class="btn btn-dark rounded-0 mt-6" @click="viewProducts">選購產品</button>
           </div>

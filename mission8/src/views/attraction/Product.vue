@@ -5,7 +5,11 @@
       <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
     </a>
     <div class="card-body p-0">
-      <h4 class="mb-0 mt-3"><a href="./detail.html">{{ product.title }}</a></h4>
+      <h4 class="mb-0 mt-3">
+        <router-link :to="`/product/${product.id}`">
+          {{ product.title }}
+        </router-link>
+      </h4>
       <p class="card-text mb-0">
         {{ product.price | formatCurrency }}
       </p>
@@ -78,7 +82,7 @@ export default {
       });
     },
     routeToThisProduct(product) {
-      this.$router.push(`/products/${product.id}`);
+      this.$router.push(`/product/${product.id}`);
     },
     updateThisProduct() {
       this.isLoading = true;

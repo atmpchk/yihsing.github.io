@@ -8,7 +8,6 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Attraction',
     component: Attraction,
     children: [
       {
@@ -20,11 +19,23 @@ const routes = [
         path: 'products',
         name: 'attraction.products',
         component: () => import('../views/attraction/Products.vue'),
+        // children: [
+        //   {
+        //     path: ':id',
+        //     name: 'attraction.products.id',
+        //     component: () => import('../views/attraction/Product.vue'),
+        //   },
+        // ],
+      },
+      {
+        path: 'product',
+        name: 'attraction.product',
+        component: () => import('../views/attraction/ProductDetail.vue'),
         children: [
           {
             path: ':id',
-            name: 'attraction.products.id',
-            component: () => import('../views/attraction/Product.vue'),
+            name: 'attraction.product.id',
+            component: () => import('../views/attraction/ProductDetail.vue'),
           },
         ],
       },
@@ -57,7 +68,6 @@ const routes = [
   },
   {
     path: '/admin',
-    name: 'admin',
     component: () => import('../views/Admin.vue'),
     meta: { requiresAuth: true },
     children: [

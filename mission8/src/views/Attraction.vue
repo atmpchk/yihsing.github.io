@@ -26,13 +26,14 @@ export default {
         forProducts: '/ec/products',
       },
       productIdsInCart: [],
-      products: [],
+      productsInCart: [],
       isLoading: false,
       isFullPageLoading: true,
       pagination: {},
     };
   },
   created() {
+    this.registerBusEvents();
     this.isLoading = true;
     this.getProductIdsInCart().then((result) => {
       this.setProductIdsInCart(result);
@@ -43,7 +44,48 @@ export default {
       console.log(reason);
     });
   },
+  beforeDestroy() {
+    this.destroyBusEvents();
+  },
   methods: {
+    registerBusEvents() {
+      this.$bus.$on('isProductInCart', (id) => {
+        setTimeout(() => {
+          this.$bus.$emit('productInCart', this.getProductQuantity(id));
+        }, 1000);
+      });
+
+      this.$bus.$on('addProductToCart', ({ id, quantity }) => {
+        if (this.productIdsInCart.includes(id)) {
+          const cartItem = this.productsInCart.find((item) => item.product.id === id);
+          cartItem.quantity += quantity;
+        } else {
+          this.productIdsInCart.push(id);
+          this.productsInCart.push({ product: { id }, quantity });
+          this.broadcastProductInCartCount();
+        }
+      });
+
+      this.$bus.$on('removeProductFromCart', (id) => {
+        if (this.productIdsInCart.includes(id)) {
+          this.productIdsInCart.splice(this.productIdsInCart.indexOf(id), 1);
+          this.productsInCart.splice(
+            this.productsInCart.findIndex((item) => item.product.id === id), 1,
+          );
+          this.broadcastProductInCartCount();
+        }
+      });
+    },
+    destroyBusEvents() {
+      this.$bus.$off('isProductInCart');
+      this.$bus.$off('addProductToCart');
+      this.$bus.$off('removeProductFromCart');
+    },
+    getProductQuantity(id) {
+      return this.productIdsInCart.includes(id)
+        ? this.productsInCart.find((item) => item.product.id === id).quantity
+        : 0;
+    },
     givePage(page) {
       if (page) return page;
       return this.pagination.current_page || 1;
@@ -53,6 +95,7 @@ export default {
     },
     setProductIdsInCart(result) {
       this.productIdsInCart = result.data.data.map((item) => item.product.id);
+      this.productsInCart = result.data.data;
     },
     broadcastProductInCartCount() {
       this.$bus.$emit('productInCartCount', this.productIdsInCart.length);
