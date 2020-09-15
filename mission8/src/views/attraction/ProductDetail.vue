@@ -45,7 +45,7 @@
         <h2 class="font-weight-bold h1 mb-1">{{ product.title }}</h2>
         <p class="mb-0 text-muted text-right" v-if="inCartQuantity > 0">
           <!-- <del>{{ product.origin_price | formatCurrency }}</del> -->
-          {{`已購 x ${inCartQuantity}`}}
+          {{`已選購 ${inCartQuantity} ${product.unit}`}}
         </p>
         <p class="h4 font-weight-bold text-right">{{ product.price | formatCurrency }}</p>
         <div class="d-flex align-items-center">
@@ -73,7 +73,11 @@
               </button>
             </div>
           </div>
-          <button type="button" class="btn btn-dark btn-block py-2" @click="putToCart">
+          <button type="button"
+            class="btn btn-dark btn-block py-2"
+            @click="putToCart"
+            :disabled="inCartQuantity >= 10"
+          >
             加入購物車
           </button>
           <!-- <a href="./checkout.html" class="btn btn-dark btn-block py-2">前往結帳</a> -->
