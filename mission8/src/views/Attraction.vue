@@ -75,11 +75,18 @@ export default {
           this.broadcastProductInCartCount();
         }
       });
+
+      this.$bus.$on('resetCart', () => {
+        this.productIdsInCart.splice(0, this.productIdsInCart.length);
+        this.productsInCart.splice(0, this.productsInCart.length);
+        this.broadcastProductInCartCount();
+      });
     },
     destroyBusEvents() {
       this.$bus.$off('isProductInCart');
       this.$bus.$off('addProductToCart');
       this.$bus.$off('removeProductFromCart');
+      this.$bus.$off('resetCart');
     },
     getProductQuantity(id) {
       return this.productIdsInCart.includes(id)

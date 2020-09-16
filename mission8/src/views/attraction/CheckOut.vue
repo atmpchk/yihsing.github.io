@@ -273,6 +273,7 @@ export default {
       this.isLoading = true;
       this.axios.post(this.apiInfo.forOrder, this.formData).then(() => {
         this.isLoading = false;
+        this.$bus.$emit('resetCart');
         this.$router.push('/checkOutFinished');
       }).catch((err) => {
         this.isLoading = false;
