@@ -46,6 +46,34 @@
       </div>
     </div>
 
+    <div class="container" v-else-if="$route.path.includes('checkOut')">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <nav class="navbar navbar-expand-lg navbar-light px-0">
+            <router-link to="/" class="navbar-brand">
+              Sweety
+            </router-link>
+            <ul class="list-unstyled mb-0 ml-md-auto d-flex align-items-center
+              justify-content-between justify-content-md-end w-100 mt-md-0 mt-4"
+            >
+              <li class="mr-md-6 mr-3 position-relative custom-step-line">
+                <i class="fas fa-check-circle d-md-inline d-block text-center">
+                </i> <span class="text-nowrap">購物清單</span>
+              </li>
+              <li class="mr-md-6 mr-3 position-relative custom-step-line">
+                <i class="fas fa-check-circle d-md-inline d-block text-center">
+                </i> <span class="text-nowrap">訂單填寫</span>
+              </li>
+              <li>
+                <i class="fas fa-dot-circle d-md-inline d-block text-center">
+                </i> <span class="text-nowrap">訂單完成</span>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
     <div class="container" v-else>
       <nav class="navbar navbar-expand-lg navbar-light">
         <router-link to="/" class="navbar-brand">

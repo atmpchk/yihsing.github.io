@@ -1,0 +1,18 @@
+.custom-step-line {
+  position: absolute;
+  &::after {
+    content: "";
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    width: 2rem;
+    height: 0.15rem;
+    background: black;
+    transform: translate(100%, -50%);
+  }
+  @include media-breakpoint-down(md) {
+    &::after {
+      display: none;
+    }
+  }
+}

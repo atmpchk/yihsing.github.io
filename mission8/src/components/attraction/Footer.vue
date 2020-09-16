@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark">
+  <div class="bg-dark" v-if="!$route.path.includes('checkOut')">
     <div class="container">
       <div class="d-flex align-items-center justify-content-between text-white py-4">
         <p class="mb-0">© 2020 Sweety All Rights Reserved.</p>

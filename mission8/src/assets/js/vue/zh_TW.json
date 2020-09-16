@@ -2,9 +2,9 @@
   "code": "zh_TW",
   "names": {
     "name": "收件人姓名",
-    "email": "E-mail",
-    "tel": "電話",
-    "address": "地址",
+    "email": "電子信箱",
+    "tel": "聯絡電話",
+    "address": "收件人地址",
     "payment": "付款方式"
   },
   "messages": {
