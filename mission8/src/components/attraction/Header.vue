@@ -46,6 +46,27 @@
       </div>
     </div>
 
+    <div class="position-relative d-flex" v-else-if="$route.path.endsWith('checkOutFinished')">
+      <div class="container d-flex flex-column" style="min-height: 100vh;">
+        <nav class="navbar navbar-expand-lg navbar-light px-0">
+          <router-link to="/" class="navbar-brand">
+            Sweety
+          </router-link>
+        </nav>
+        <div class="row my-auto pb-7">
+          <div class="col-md-4 d-flex flex-column">
+            <div class="my-auto">
+              <h2>訂購完成</h2>
+              <p>已送出您的訂購單，歡迎您再次選購，謝謝！</p>
+              <router-link to="/" class="btn btn-dark mt-4 px-5" exact>回到首頁</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-md-50 w-100 position-absolute opacity-1 checkout-finished-img">
+      </div>
+    </div>
+
     <div class="container" v-else-if="$route.path.includes('checkOut')">
       <div class="row justify-content-center">
         <div class="col-md-10">
@@ -153,4 +174,11 @@ export default {
   position: absolute;
 }
 
+.checkout-finished-img {
+  z-index: -1;
+  min-height: 100vh;
+  right: 0;
+  background-image: url(https://hexschool-api.s3.us-west-2.amazonaws.com/custom/9lkw3NZPCM09C05IruMP7z7AeuYRhImFry8QFtjOzljjeTMo92kGrCu6GSe4ijurmxDxI4hZOj9r0ftiljsBaWufPpvUYNyLuExnwX8KvrVGKqyzbjIKaoTjrhnUDLgE.png);
+  background-position: center center;
+}
 </style>
