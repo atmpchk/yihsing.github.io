@@ -105,8 +105,23 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">付款方式</th>
-                    <td class="text-right border-0 px-0 pt-0 pb-4">ApplePay</td>
+                    <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal align-middle">
+                      付款方式
+                    </th>
+                    <td class="text-right border-0 px-0 pt-0 pb-4">
+                      <select id="payment"
+                        v-model="payment"
+                        class="text-right form-control rounded-0 my-auto shadow-none bg-white"
+                        @change="updatePayment"
+                      >
+                        <option v-for="payment in paymentMethods"
+                          :key="payment"
+                          :value="payment"
+                        >
+                          {{ payment }}
+                        </option>
+                      </select>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -114,7 +129,7 @@
                 <p class="mb-0 h4 font-weight-bold">總計</p>
                 <p class="mb-0 h4 font-weight-bold">{{ priceSummary | formatCurrency }}</p>
               </div>
-              <a href="./checkout.html" class="btn btn-dark btn-block mt-4">訂單確定</a>
+              <router-link to="/checkOut" class="btn btn-dark btn-block mt-4">訂單確定</router-link>
             </div>
           </div>
         </div>
@@ -263,6 +278,11 @@ export default {
       isLoading: false,
       isFullPageLoading: true,
       pagination: {},
+      paymentMethods: [
+        'WebATM', 'ATM', 'CVS', 'Barcode', 'Credit', 'ApplePay', 'GooglePay',
+      ],
+      payment: 'Credit',
+      payemntExpired: 30 * 24 * 60 * 60 * 1000,
     };
   },
   computed: {
@@ -271,6 +291,12 @@ export default {
         (accumulated, currItem) => accumulated + (currItem.product.price * currItem.quantity), 0,
       );
     },
+  },
+  created() {
+    const payment = document.cookie.replace(/(?:(?:^|.*;\s*)hexSchoolPayment\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    if (payment) {
+      this.payment = payment;
+    }
   },
   mounted() {
     this.getCart();
@@ -327,6 +353,9 @@ export default {
     },
     setLoading(isLoading) {
       this.isLoading = isLoading;
+    },
+    updatePayment() {
+      document.cookie = `hexSchoolPayment=${this.payment};expires=${new Date(Date.now() + this.payemntExpired)}; path=/`;
     },
   },
 };
