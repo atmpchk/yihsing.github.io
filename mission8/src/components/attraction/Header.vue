@@ -36,7 +36,7 @@
         </nav>
         <div class="row justify-content-center my-auto">
           <div class="col-md-4 text-center">
-            <h2>歡迎回來 Sweety</h2>
+            <h2>歡迎回來 <span class="navbar-brand">Sweety</span></h2>
             <p class="text-muted mb-0">
               有您的造訪是我們最大的榮幸
             </p>
