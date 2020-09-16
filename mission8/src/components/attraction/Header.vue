@@ -36,9 +36,9 @@
         </nav>
         <div class="row justify-content-center my-auto">
           <div class="col-md-4 text-center">
-            <h2>歡迎回來 <span class="navbar-brand">Sweety</span></h2>
+            <h2>歡迎回來<br><span class="navbar-brand">Sweety</span></h2>
             <p class="text-muted mb-0">
-              有您的造訪是我們最大的榮幸
+              只溶於口、不溶於手
             </p>
             <button class="btn btn-dark rounded-0 mt-6" @click="viewProducts">選購產品</button>
           </div>
