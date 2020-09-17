@@ -1,6 +1,8 @@
 <template>
   <div class="card border-0 mb-4 position-relative position-relative">
-    <img :src="product.imageUrl[0]" class="card-img-top rounded-0" alt="...">
+    <div class="responsive-rectangle">
+      <img :src="product.imageUrl[0]" class="card-img-top rounded-0" alt="...">
+    </div>
     <a href="#" class="text-dark">
       <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
     </a>
@@ -98,5 +100,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.responsive-rectangle {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  overflow: hidden;
+}
 </style>

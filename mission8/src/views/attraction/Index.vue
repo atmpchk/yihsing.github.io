@@ -4,11 +4,13 @@
       <div class="row mt-5">
         <div class="col-md-4 mt-md-4">
           <div class="card border-0 mb-4">
-            <img
-              src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/cSYtrAzitF1ra1W4KKyRDbVIVZl8GGQ2kyEnBTSaT12nHZsyttFxbTlezrBtgMUR8teYoygLX79HQeY3FU2tYBAw3bRv0jBdrtFcTMw06wdCHV0HKAOjdkxsO5OOE55x.jpg"
-              class="card-img-top rounded-0"
-              alt="..."
-            />
+            <div class="responsive-rectangle">
+              <img
+                src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/cSYtrAzitF1ra1W4KKyRDbVIVZl8GGQ2kyEnBTSaT12nHZsyttFxbTlezrBtgMUR8teYoygLX79HQeY3FU2tYBAw3bRv0jBdrtFcTMw06wdCHV0HKAOjdkxsO5OOE55x.jpg"
+                class="card-img-top rounded-0"
+                alt="..."
+              />
+            </div>
             <div class="card-body text-center">
               <h4>純粹巧克力</h4>
               <div class="d-flex justify-content-between">
@@ -21,11 +23,13 @@
         </div>
         <div class="col-md-4 mt-md-4">
           <div class="card border-0 mb-4">
-            <img
-              src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/JAMttJut08MOk3yaLgBb7KS2o9yp7dMQcvpqKr7SCC1vx6vsLKX9T7KpaFUbwNcxquoqnHAQxnvUXr9fY8u5c3s7WicHyi6UwjsIChfQKeoqL1JC8H2FbcXfl9ypChjw.jpg"
-              class="card-img-top rounded-0"
-              alt="..."
-            />
+            <div class="responsive-rectangle">
+              <img
+                src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/bMpVHmFCpY71yfhgamLHlUozlikTrjOxJs86kji1zJ8wEY11EIuNmLEqfOJLPc5yFzUy0hnd1zsBt2zQfJFp89iskg4WRy7ZjizH95QEU3gVhid18a7JBbGvaUsPbma4.jpg"
+                class="card-img-top rounded-0"
+                alt="..."
+              />
+            </div>
             <div class="card-body text-center">
               <h4>牛奶巧克力</h4>
               <div class="d-flex justify-content-between">
@@ -38,11 +42,13 @@
         </div>
         <div class="col-md-4 mt-md-4">
           <div class="card border-0 mb-4">
-            <img
-              src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/8QpJ6wLdL4MqQZumpTKyQ0u6e5L8H2kN4zLV9qJ0ItU55HQfy7QFVrG2fsRnFGn4dPbXATaJONcN84v0CO6uNCCaOiCsp8DBEhpjLA5e8Fott7spnu0l8FJuPkV7PKSQ.jpg"
-              class="card-img-top rounded-0"
-              alt="..."
-            />
+            <div class="responsive-rectangle">
+              <img
+                src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/8QpJ6wLdL4MqQZumpTKyQ0u6e5L8H2kN4zLV9qJ0ItU55HQfy7QFVrG2fsRnFGn4dPbXATaJONcN84v0CO6uNCCaOiCsp8DBEhpjLA5e8Fott7spnu0l8FJuPkV7PKSQ.jpg"
+                class="card-img-top rounded-0"
+                alt="..."
+              />
+            </div>
             <div class="card-body text-center">
               <h4>典藏巧克力</h4>
               <div class="d-flex justify-content-between">
@@ -74,4 +80,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.responsive-rectangle {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  overflow: hidden;
+}
 </style>

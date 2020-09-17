@@ -6,39 +6,45 @@
           <div class="carousel-item active">
             <div class="row justify-content-center py-7">
               <div class="col-md-6 text-center">
-                <h3>Lorem ipsum.</h3>
+                <h3>可愛廚師親製的甜點</h3>
                 <p class="my-5">
-                  “Lorem ipsum dolor sit amet,
-                   consetetur sadipscing elitr,
-                   sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.”
+                  {{
+                    `『廚師是個可愛的帥哥，半開放式廚房可以看到他在裡面做甜點
+                    、甜點的份量都很精緻，用料紮實，也很好吃』`
+                  }}
                 </p>
-                <p><small>—Lorem ipsum dolor sit amet.—</small></p>
+                <p><small>— Winnie H. —</small></p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
             <div class="row justify-content-center py-7">
               <div class="col-md-6 text-center">
-                <h3>Lorem ipsum.</h3>
+                <h3>很有溫度的甜點店</h3>
                 <p class="my-5">
-                  “Lorem ipsum dolor sit amet,
-                   consetetur sadipscing elitr,
-                   sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.”
+                  {{
+                    `『店內的甜點以巧克力為主軸，雖然可選擇的項目不多，
+                    但是店內每一項商品，嘗過後都可以感受到廚師的用心，
+                    非常建議好好品嘗店內各種風味的巧克力甜點！』`
+                  }}
                 </p>
-                <p><small>—Lorem ipsum dolor sit amet.—</small></p>
+                <p><small>— Rossa H. —</small></p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
             <div class="row justify-content-center py-7">
               <div class="col-md-6 text-center">
-                <h3>Lorem ipsum.</h3>
+                <h3>好吃又特別的甜點</h3>
                 <p class="my-5">
-                  “Lorem ipsum dolor sit amet,
-                   consetetur sadipscing elitr,
-                   sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.”
+                  {{
+                    `『吃得到食材的原味，也可以吃到廚師的用心。
+                    開放式的廚房，可以看到可愛的外籍主廚在弄甜點，
+                    茶的味道也很香，而且可以感受到是很天然的茶葉，
+                    是一間會讓人想一訪再訪的甜點店』`
+                  }}
                 </p>
-                <p><small>—Lorem ipsum dolor sit amet.—</small></p>
+                <p><small>— Amber L. —</small></p>
               </div>
             </div>
           </div>
