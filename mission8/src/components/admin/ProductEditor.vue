@@ -211,6 +211,7 @@ export default {
     },
     editProduct() {
       this.formData.options = JSON.stringify(this.formData.options);
+      this.formData.imageUrl = this.formData.imageUrl.filter((url) => url !== null);
       this.$emit('set-loading', true);
       this.axios.patch(`${this.apiInfo.forSingleProduct}/${this.formData.id}`, this.formData).then(() => {
         this.$emit('set-loading', false);
