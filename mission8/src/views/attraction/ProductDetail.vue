@@ -92,8 +92,8 @@
         <p class="text-muted">{{ product.description }}</p>
       </div>
     </div>
-    <h3 class="font-weight-bold">更多相關產品</h3>
-    <div class="swiper-container mt-4 mb-5">
+    <!-- <h3 class="font-weight-bold">更多相關產品</h3> -->
+    <!-- <div class="swiper-container mt-4 mb-5">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <div class="card border-0 mb-4 position-relative position-relative">
@@ -124,7 +124,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
