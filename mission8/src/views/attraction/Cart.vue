@@ -133,7 +133,7 @@
             </div>
           </div>
         </div>
-        <div class="my-5">
+        <!-- <div class="my-5">
           <h3 class="font-weight-bold">Lorem ipsum dolor sit amet</h3>
           <div class="swiper-container mt-4 mb-5">
             <div class="swiper-wrapper">
@@ -209,7 +209,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
