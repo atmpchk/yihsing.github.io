@@ -1,7 +1,7 @@
 <template>
   <div id="cart" class="container">
     <loading :active.sync="isLoading" :is-full-page="isFullPageLoading"></loading>
-    <div class="container">
+    <div class="container mb-5">
       <div class="mt-3">
         <h3 class="mt-3 mb-4">購物清單</h3>
         <div class="row">
