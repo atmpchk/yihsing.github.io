@@ -33,7 +33,7 @@
               v-for="(key, index) in Object.keys(groupedProducts)"
               :key="key"
               :class="listGroupStyles(index)"
-              @click="switchGroup(index)"
+              @click="switchGroup(key)"
             >
               {{ key }}
             </button>
@@ -98,12 +98,13 @@ export default {
       if (this.currGroup === 'favorited') {
         return this.products.filter((product) => this.favoriteInfo.content.includes(product.id));
       }
-
-      return this.groupedProducts[Object.keys(this.groupedProducts)[this.currGroup]];
+      return this.groupedProducts[this.currGroup];
     },
     listGroupStyles() {
       return (index) => ({
-        active: index === this.currGroup,
+        active: index === Object.keys(this.groupedProducts).findIndex(
+          (item) => item === this.currGroup,
+        ),
         'border-bottom': index === Object.keys(this.groupedProducts).length - 1,
       });
     },
@@ -115,6 +116,10 @@ export default {
     },
   },
   created() {
+    this.currGroup = this.$route.params.category
+      ? this.$route.params.category
+      : '*';
+
     this.favoriteInfo.content = window.localStorage.getItem(this.favoriteInfo.key)
       ? window.localStorage.getItem(this.favoriteInfo.key).split(',')
       : [];
@@ -131,8 +136,9 @@ export default {
     });
   },
   methods: {
-    switchGroup(index) {
-      this.currGroup = index;
+    switchGroup(group) {
+      this.currGroup = group;
+      this.$router.push(`/products/${group}`);
     },
     givePage(page) {
       if (page) return page;
@@ -168,6 +174,7 @@ export default {
     trySwitchFilterWhenFavoritesEmpty() {
       if (!this.haveFavorites) {
         this.currGroup = '*';
+        this.$router.push('/products/*');
       }
     },
   },

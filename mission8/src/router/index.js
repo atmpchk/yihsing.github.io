@@ -19,13 +19,13 @@ const routes = [
         path: 'products',
         name: 'attraction.products',
         component: () => import('../views/attraction/Products.vue'),
-        // children: [
-        //   {
-        //     path: ':id',
-        //     name: 'attraction.products.id',
-        //     component: () => import('../views/attraction/Product.vue'),
-        //   },
-        // ],
+        children: [
+          {
+            path: ':category',
+            name: 'attraction.products.category',
+            component: () => import('../views/attraction/Products.vue'),
+          },
+        ],
       },
       {
         path: 'product',
@@ -35,6 +35,7 @@ const routes = [
           {
             path: ':id',
             name: 'attraction.product.id',
+            meta: { scrollToTop: true },
             component: () => import('../views/attraction/ProductDetail.vue'),
           },
         ],
@@ -112,7 +113,12 @@ function scrollBehavior(to, from, savedPosition) {
   if (savedPosition) {
     return savedPosition;
   }
-  return { x: 0, y: 0 };
+
+  if (to.matched.some((record) => record.meta.scrollToTop)) {
+    return { x: 0, y: 0 };
+  }
+
+  return false;
 }
 
 const router = new VueRouter({
