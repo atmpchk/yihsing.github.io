@@ -103,12 +103,12 @@
               </div>
             </router-link>
             <div class="card-body p-0">
-              <h4 class="mb-0 mt-3">
+              <h4 class="mb-0 mt-3 pl-1">
                 <router-link :to="`/product/${product.id}`">
                   {{ product.title }}
                 </router-link>
               </h4>
-              <p class="card-text mb-0">
+              <p class="card-text mb-0 pl-1">
                 {{ product.price | formatCurrency }}
               </p>
               <p class="text-muted mt-3"></p>
@@ -233,4 +233,12 @@ export default {
   overflow: hidden;
 }
 
+.card {
+  transition: all .3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(0,0,0,.2);
+}
 </style>

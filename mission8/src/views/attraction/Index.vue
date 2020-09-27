@@ -86,4 +86,13 @@ export default {
   padding-bottom: 100%;
   overflow: hidden;
 }
+
+.card {
+  transition: all .3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(0,0,0,.2);
+}
 </style>
