@@ -25,7 +25,7 @@
               :class="{ active: currGroup === 'favorited'}"
               @click="switchGroup('favorited')"
             >
-              我享要
+              就是享要
               <i class="fas fa-heart"></i>
             </button>
             <button type="button"
