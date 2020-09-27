@@ -45,7 +45,7 @@
         <h2 class="font-weight-bold h1 mb-1">{{ product.title }}</h2>
         <p class="mb-0 text-muted text-right" v-if="inCartQuantity > 0">
           <!-- <del>{{ product.origin_price | formatCurrency }}</del> -->
-          {{`已選購 ${inCartQuantity} ${product.unit}`}}
+          {{`已選購 ${inCartQuantity} ${product.unit || ''}`}}
         </p>
         <p class="h4 font-weight-bold text-right">{{ product.price | formatCurrency }}</p>
         <div class="d-flex align-items-center">
@@ -94,11 +94,13 @@
     </div>
     <h3 class="font-weight-bold" v-if="haveRelatedProducts">更多相關產品</h3>
     <div class="swiper-container mt-4 mb-5" v-if="haveRelatedProducts">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="product in relatedProducts" :key="product.id">
+      <div class="row">
+        <div class="col-md-6" v-for="product in relatedProducts" :key="product.id">
           <div class="card border-0 mb-4 position-relative position-relative">
             <router-link :to="`/product/${product.id}`" class="text-dark">
-              <img :src="product.imageUrl[0]" class="card-img-top rounded-0" alt="...">
+              <div class="responsive-rectangle">
+                <img :src="product.imageUrl[0]" class="card-img-top rounded-0" alt="...">
+              </div>
             </router-link>
             <div class="card-body p-0">
               <h4 class="mb-0 mt-3">
@@ -223,5 +225,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.responsive-rectangle {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  overflow: hidden;
+}
+
 </style>
