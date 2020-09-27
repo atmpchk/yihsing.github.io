@@ -5,7 +5,7 @@
       style="min-height: 400px;"
     >
       <div class="position-absolute jumbotron-img"></div>
-      <h2 class="font-weight-bold">精選產品</h2>
+      <h2 class="font-weight-bold">只溶於口、不溶於手</h2>
     </div>
 
     <div class="container mt-md-5 mt-3 mb-7">
@@ -35,7 +35,9 @@
             <div class="col-md-6" v-for="product in filteredProducts" :key="product.id">
               <product :product="product"
                 :in-cart="isInCart(product)"
-                @put-to-cart="putToCart">
+                @put-to-cart="putToCart"
+                :favorited="isFavorite(product)"
+                @toggle-favorite="toggleFavorite">
               </product>
             </div>
           </div>
@@ -66,6 +68,10 @@ export default {
       isLoading: false,
       isFullPageLoading: true,
       pagination: {},
+      favoriteInfo: {
+        key: 'hexSchoolFavorites',
+        content: [],
+      },
     };
   },
   computed: {
@@ -86,6 +92,14 @@ export default {
         'border-bottom': index === Object.keys(this.groupedProducts).length - 1,
       });
     },
+    isFavorite() {
+      return (product) => this.favoriteInfo.content.includes(product.id);
+    },
+  },
+  created() {
+    this.favoriteInfo.content = window.localStorage.getItem(this.favoriteInfo.key)
+      ? window.localStorage.getItem(this.favoriteInfo.key).split(',')
+      : [];
   },
   mounted() {
     this.isLoading = true;
@@ -121,6 +135,16 @@ export default {
     },
     putToCart(id) {
       this.productIdsInCart.push(id);
+    },
+    toggleFavorite(id) {
+      const targetIndex = this.favoriteInfo.content.indexOf(id);
+      if (targetIndex > -1) {
+        this.favoriteInfo.content.splice(targetIndex, 1);
+      } else {
+        this.favoriteInfo.content.push(id);
+      }
+      const storage = window.localStorage;
+      storage.setItem(this.favoriteInfo.key, this.favoriteInfo.content.toString());
     },
   },
 };

@@ -36,7 +36,7 @@
         </nav>
         <div class="row justify-content-center my-auto">
           <div class="col-md-4 text-center">
-            <h2>歡迎回來<br><span class="navbar-brand">Sweety</span></h2>
+            <h2>就是享要...<br><span class="navbar-brand">Sweety</span></h2>
             <p class="text-muted mb-0">
               只溶於口、不溶於手
             </p>

@@ -3,8 +3,17 @@
     <div class="responsive-rectangle">
       <img :src="product.imageUrl[0]" class="card-img-top rounded-0" alt="...">
     </div>
-    <a href="#" class="text-dark">
-      <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
+    <a href="#" class="text-dark" @click.prevent="toggleFavorite(product)">
+      <i class="fas fa-heart position-absolute"
+        v-if="favorited"
+        style="right: 16px; top: 16px"
+      >
+      </i>
+      <i class="far fa-heart position-absolute"
+        v-else
+        style="right: 16px; top: 16px"
+      >
+      </i>
     </a>
     <div class="card-body p-0">
       <h4 class="mb-0 mt-3">
@@ -50,7 +59,7 @@
 
 <script>
 export default {
-  props: ['product', 'inCart'],
+  props: ['product', 'inCart', 'favorited'],
   data() {
     return {
       apiInfo: {
@@ -95,6 +104,9 @@ export default {
         this.isLoading = false;
         console.log(err);
       });
+    },
+    toggleFavorite(product) {
+      this.$emit('toggle-favorite', product.id);
     },
   },
 };
