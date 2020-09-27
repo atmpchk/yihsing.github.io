@@ -38,7 +38,7 @@
               <router-link to="/" exact>首頁</router-link>
             </li>
             <li class="breadcrumb-item">
-              <router-link :to="`/products`">產品</router-link>
+              <router-link to="/products">產品</router-link>
             </li>
           </ol>
         </nav>
@@ -92,39 +92,29 @@
         <p class="text-muted">{{ product.description }}</p>
       </div>
     </div>
-    <!-- <h3 class="font-weight-bold">更多相關產品</h3> -->
-    <!-- <div class="swiper-container mt-4 mb-5">
+    <h3 class="font-weight-bold" v-if="haveRelatedProducts">更多相關產品</h3>
+    <div class="swiper-container mt-4 mb-5" v-if="haveRelatedProducts">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
+        <div class="swiper-slide" v-for="product in relatedProducts" :key="product.id">
           <div class="card border-0 mb-4 position-relative position-relative">
-            <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" class="card-img-top rounded-0" alt="...">
-            <a href="#" class="text-dark">
-            </a>
+            <router-link :to="`/product/${product.id}`" class="text-dark">
+              <img :src="product.imageUrl[0]" class="card-img-top rounded-0" alt="...">
+            </router-link>
             <div class="card-body p-0">
-              <h4 class="mb-0 mt-3"><a href="#">Lorem ipsum</a></h4>
+              <h4 class="mb-0 mt-3">
+                <router-link :to="`/product/${product.id}`">
+                  {{ product.title }}
+                </router-link>
+              </h4>
               <p class="card-text mb-0">
-                NT$1,080 <span class="text-muted "><del>NT$1,200</del></span>
-              </p>
-              <p class="text-muted mt-3"></p>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="card border-0 mb-4 position-relative position-relative">
-            <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" class="card-img-top rounded-0" alt="...">
-            <a href="#" class="text-dark">
-            </a>
-            <div class="card-body p-0">
-              <h4 class="mb-0 mt-3"><a href="#">Lorem ipsum</a></h4>
-              <p class="card-text mb-0">
-                NT$1,080 <span class="text-muted "><del>NT$1,200</del></span>
+                {{ product.price | formatCurrency }}
               </p>
               <p class="text-muted mt-3"></p>
             </div>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -140,6 +130,7 @@ export default {
       apiInfo: {
         forCart: '/ec/shopping',
         forProduct: '/ec/product',
+        forProducts: '/ec/products',
       },
       isLoading: false,
       isFullPageLoading: true,
@@ -156,20 +147,23 @@ export default {
         precision: 0,
         masked: false,
       },
+      relatedProducts: [],
     };
   },
   computed: {
+    haveRelatedProducts() {
+      return this.relatedProducts.length > 0;
+    },
+  },
+  watch: {
+    $route(to) {
+      if (to.params.id !== this.product.id) {
+        this.setAndQueryProduct();
+      }
+    },
   },
   created() {
-    this.product.id = this.$route.params.id;
-
-    this.$bus.$emit('isProductInCart', this.product.id);
-
-    this.$bus.$on('productInCart', (quantity) => {
-      this.inCartQuantity = quantity;
-    });
-
-    this.queryProduct();
+    this.setAndQueryProduct();
   },
   mounted() {
   },
@@ -177,6 +171,19 @@ export default {
     this.$bus.$off('productInCart');
   },
   methods: {
+    setAndQueryProduct() {
+      this.relatedProducts = [];
+
+      this.product.id = this.$route.params.id;
+
+      this.$bus.$emit('isProductInCart', this.product.id);
+
+      this.$bus.$on('productInCart', (quantity) => {
+        this.inCartQuantity = quantity;
+      });
+
+      this.queryProduct();
+    },
     putToCart() {
       this.isLoading = true;
       const method = this.inCartQuantity > 0 ? 'patch' : 'post';
@@ -197,8 +204,18 @@ export default {
       this.axios.get(`${this.apiInfo.forProduct}/${this.product.id}`).then((result) => {
         this.product = result.data.data;
         this.isLoading = false;
+        this.findRelatedProducts();
       }).catch((err) => {
         this.isLoading = false;
+        console.log(err);
+      });
+    },
+    findRelatedProducts() {
+      this.axios.get(`${this.apiInfo.forProducts}`).then((result) => {
+        this.relatedProducts = result.data.data.filter(
+          (product) => product.category === this.product.category && product.id !== this.product.id,
+        ).splice(0, 2);
+      }).catch((err) => {
         console.log(err);
       });
     },
