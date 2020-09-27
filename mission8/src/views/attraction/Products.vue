@@ -20,6 +20,15 @@
               所有產品
             </button>
             <button type="button"
+              v-if="haveFavorites"
+              class="list-group-item list-group-item-action"
+              :class="{ active: currGroup === 'favorited'}"
+              @click="switchGroup('favorited')"
+            >
+              我享要
+              <i class="fas fa-heart"></i>
+            </button>
+            <button type="button"
               class="list-group-item list-group-item-action"
               v-for="(key, index) in Object.keys(groupedProducts)"
               :key="key"
@@ -82,9 +91,15 @@ export default {
       return arrayUtils(this.products, 'category');
     },
     filteredProducts() {
-      return this.currGroup === '*'
-        ? this.products
-        : this.groupedProducts[Object.keys(this.groupedProducts)[this.currGroup]];
+      if (this.currGroup === '*') {
+        return this.products;
+      }
+
+      if (this.currGroup === 'favorited') {
+        return this.products.filter((product) => this.favoriteInfo.content.includes(product.id));
+      }
+
+      return this.groupedProducts[Object.keys(this.groupedProducts)[this.currGroup]];
     },
     listGroupStyles() {
       return (index) => ({
@@ -94,6 +109,9 @@ export default {
     },
     isFavorite() {
       return (product) => this.favoriteInfo.content.includes(product.id);
+    },
+    haveFavorites() {
+      return this.favoriteInfo.content.length > 0;
     },
   },
   created() {
@@ -143,8 +161,14 @@ export default {
       } else {
         this.favoriteInfo.content.push(id);
       }
+      this.trySwitchFilterWhenFavoritesEmpty();
       const storage = window.localStorage;
       storage.setItem(this.favoriteInfo.key, this.favoriteInfo.content.toString());
+    },
+    trySwitchFilterWhenFavoritesEmpty() {
+      if (!this.haveFavorites) {
+        this.currGroup = '*';
+      }
     },
   },
 };
