@@ -25,6 +25,9 @@
               <router-link to="/products" class="nav-item nav-link mr-4">
                 產品
               </router-link>
+              <router-link to="/coupon" class="nav-item nav-link mr-4">
+                享折扣
+              </router-link>
               <router-link to="/cart" class="nav-item nav-link mr-4">
                 <i class="fas fa-shopping-cart"></i>
                 <div class="badge badge-pill badge-danger cart-badge" v-if="productInCartCount">
@@ -117,6 +120,9 @@
             </router-link>
             <router-link to="/products" class="nav-item nav-link mr-4">
               產品
+            </router-link>
+            <router-link to="/coupon" class="nav-item nav-link mr-4">
+              享折扣
             </router-link>
             <router-link to="/cart" class="nav-item nav-link mr-4">
               <i class="fas fa-shopping-cart"></i>

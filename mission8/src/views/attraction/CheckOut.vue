@@ -33,6 +33,14 @@
                 <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">小計</th>
                 <td class="text-right border-0 px-0 pt-4">{{ priceSummary | formatCurrency }}</td>
               </tr>
+              <tr v-if="couponInfo">
+                <th scope="row" class="border-0 px-0 pt-0 pb-2 font-weight-normal">
+                  {{ couponInfo.title }}
+                </th>
+                <td class="text-right text-danger border-0 px-0 pt-0 pb-2">
+                  {{ '- ' }}{{ discountedBy | formatCurrency }}
+                </td>
+              </tr>
               <tr>
                 <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">付款方式</th>
                 <td class="text-right border-0 px-0 pt-0 pb-4">{{ formData.payment }}</td>
@@ -41,7 +49,7 @@
           </table>
           <div class="d-flex justify-content-between mt-4">
             <p class="mb-0 h4 font-weight-bold">總計</p>
-            <p class="mb-0 h4 font-weight-bold">{{ priceSummary | formatCurrency }}</p>
+            <p class="mb-0 h4 font-weight-bold">{{ totalPrice | formatCurrency }}</p>
           </div>
         </div>
       </div>
@@ -216,6 +224,7 @@ export default {
       apiInfo: {
         forCart: '/ec/shopping',
         forOrder: '/ec/orders',
+        forCouponSearch: '/ec/coupon/search',
       },
       cart: [],
       paymentMethods: [
@@ -232,6 +241,7 @@ export default {
       isLoading: false,
       isFullPageLoading: true,
       pagination: {},
+      couponInfo: null,
     };
   },
   computed: {
@@ -239,6 +249,12 @@ export default {
       return this.cart.reduce(
         (accumulated, currItem) => accumulated + (currItem.product.price * currItem.quantity), 0,
       );
+    },
+    discountedBy() {
+      return this.couponInfo ? this.priceSummary * ((100 - this.couponInfo.percent) / 100) : 0;
+    },
+    totalPrice() {
+      return this.priceSummary - this.discountedBy;
     },
   },
   created() {
@@ -248,7 +264,18 @@ export default {
     }
   },
   mounted() {
-    this.getCart();
+    this.isLoading = true;
+    this.getCart()
+      .then(this.setCart)
+      .then(this.getCoupon)
+      .then(this.setCoupon)
+      .then(() => {
+        this.isLoading = false;
+      })
+      .catch((reason) => {
+        this.isLoading = false;
+        console.log(reason);
+      });
   },
   methods: {
     givePage(page) {
@@ -256,22 +283,34 @@ export default {
       return this.pagination.current_page || 1;
     },
     getCart(page) {
-      this.isLoading = true;
-      this.axios.get(`${this.apiInfo.forCart}?page=${this.givePage(page)}`).then((result) => {
-        this.cart = result.data.data;
-        this.pagination = result.data.meta.pagination;
-        if (this.cart.length === 0) {
-          this.$router.replace('/');
-        }
-        this.isLoading = false;
-      }).catch((err) => {
-        this.isLoading = false;
-        console.log(err);
-      });
+      return this.axios.get(`${this.apiInfo.forCart}?page=${this.givePage(page)}`);
+    },
+    setCart(result) {
+      this.cart = result.data.data;
+      this.pagination = result.data.meta.pagination;
+      if (this.cart.length === 0) {
+        this.$router.replace('/');
+      }
+    },
+    getCoupon() {
+      return this.$route.params.coupon
+        ? this.axios.post(this.apiInfo.forCouponSearch, {
+          code: this.$route.params.coupon,
+        })
+        : Promise.resolve(null);
+    },
+    setCoupon(result) {
+      this.couponInfo = result
+        ? result.data.data
+        : null;
     },
     submitForm() {
       this.isLoading = true;
-      this.axios.post(this.apiInfo.forOrder, this.formData).then(() => {
+      const formData = {
+        ...this.formData,
+        ...(this.couponInfo ? { coupon: this.couponInfo.code } : {}),
+      };
+      this.axios.post(this.apiInfo.forOrder, formData).then(() => {
         this.isLoading = false;
         this.$bus.$emit('resetCart');
         this.$router.push('/checkOutFinished');

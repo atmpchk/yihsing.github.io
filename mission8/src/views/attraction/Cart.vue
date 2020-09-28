@@ -78,8 +78,10 @@
                 class="form-control rounded-0
                   border-bottom border-top-0 border-left-0 border-right-0 shadow-none"
                 placeholder="折扣代碼"
-                aria-label="Recipient's username"
+                aria-label="Coupon Code"
                 aria-describedby="button-addon2"
+                v-model="couponCode"
+                @input="resetCouponData"
               >
               <div class="input-group-append">
                 <button
@@ -87,10 +89,14 @@
                     border-bottom border-top-0 border-left-0 border-right-0 rounded-0"
                   type="button"
                   id="button-addon2"
+                  @click="searchCoupon"
                 >
                   <i class="fas fa-paper-plane"></i>
                 </button>
               </div>
+            </div>
+            <div>
+              <div v-if="this.couponFailMsg" class="text-muted">{{ couponFailMsg }}</div>
             </div>
           </div>
           <div class="col-md-4">
@@ -102,6 +108,14 @@
                     <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">小計</th>
                     <td class="text-right border-0 px-0 pt-4">
                       {{ priceSummary | formatCurrency }}
+                    </td>
+                  </tr>
+                  <tr v-if="couponInfo">
+                    <th scope="row" class="border-0 px-0 pt-0 pb-2 font-weight-normal">
+                      {{ couponInfo.title }}
+                    </th>
+                    <td class="text-right text-danger border-0 px-0 pt-0 pb-2">
+                      {{ '- ' }}{{ discountedBy | formatCurrency }}
                     </td>
                   </tr>
                   <tr>
@@ -127,9 +141,13 @@
               </table>
               <div class="d-flex justify-content-between mt-4">
                 <p class="mb-0 h4 font-weight-bold">總計</p>
-                <p class="mb-0 h4 font-weight-bold">{{ priceSummary | formatCurrency }}</p>
+                <p class="mb-0 h4 font-weight-bold">{{ totalPrice | formatCurrency }}</p>
               </div>
-              <router-link to="/checkOut" class="btn btn-dark btn-block mt-4">訂單確定</router-link>
+              <router-link :to="`/checkOut${discountPath}`"
+                class="btn btn-dark btn-block mt-4"
+              >
+                訂單確定
+              </router-link>
             </div>
           </div>
         </div>
@@ -272,6 +290,7 @@ export default {
   data() {
     return {
       apiInfo: {
+        forCouponSearch: '/ec/coupon/search',
         forCart: '/ec/shopping',
       },
       cart: [],
@@ -283,6 +302,9 @@ export default {
       ],
       payment: 'Credit',
       payemntExpired: 30 * 24 * 60 * 60 * 1000,
+      couponCode: '',
+      couponInfo: null,
+      couponFailMsg: '',
     };
   },
   computed: {
@@ -290,6 +312,15 @@ export default {
       return this.cart.reduce(
         (accumulated, currItem) => accumulated + (currItem.product.price * currItem.quantity), 0,
       );
+    },
+    discountedBy() {
+      return this.couponInfo ? this.priceSummary * ((100 - this.couponInfo.percent) / 100) : 0;
+    },
+    totalPrice() {
+      return this.priceSummary - this.discountedBy;
+    },
+    discountPath() {
+      return this.couponInfo ? `/${this.couponInfo.code}` : '';
     },
   },
   created() {
@@ -356,6 +387,27 @@ export default {
     },
     updatePayment() {
       document.cookie = `hexSchoolPayment=${this.payment};expires=${new Date(Date.now() + this.payemntExpired)}; path=/`;
+    },
+    resetCouponData() {
+      this.couponInfo = null;
+      this.couponFailMsg = '';
+    },
+    searchCoupon() {
+      if (this.couponCode.trim() === '') {
+        this.couponCode = '';
+        return;
+      }
+      this.isLoading = true;
+      this.axios.post(this.apiInfo.forCouponSearch, {
+        code: this.couponCode,
+      }).then((result) => {
+        this.couponInfo = result.data.data;
+        this.isLoading = false;
+      }).catch((err) => {
+        this.couponFailMsg = '無效或不存在的折扣代碼';
+        this.isLoading = false;
+        console.log(err);
+      });
     },
   },
 };

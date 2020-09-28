@@ -49,6 +49,13 @@ const routes = [
         path: 'checkOut',
         name: 'attraction.checkOut',
         component: () => import('../views/attraction/CheckOut.vue'),
+        children: [
+          {
+            path: ':coupon',
+            name: 'attraction.checkOut.coupon',
+            component: () => import('../views/attraction/CheckOut.vue'),
+          },
+        ],
       },
       {
         path: 'checkOutFinished',
@@ -56,9 +63,9 @@ const routes = [
         component: () => import('../views/attraction/CheckOutFinished.vue'),
       },
       {
-        path: 'about',
-        name: 'attraction.about',
-        component: () => import('../views/attraction/About.vue'),
+        path: 'coupon',
+        name: 'attraction.coupon',
+        component: () => import('../views/attraction/Coupon.vue'),
       },
     ],
   },
