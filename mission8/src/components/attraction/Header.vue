@@ -23,7 +23,7 @@
                 首頁 <span class="sr-only">(current)</span>
               </router-link>
               <router-link to="/products" class="nav-item nav-link mr-4">
-                產品
+                享美味
               </router-link>
               <router-link to="/coupon" class="nav-item nav-link mr-4">
                 享折扣
@@ -43,7 +43,7 @@
             <p class="text-muted mb-0">
               只溶於口、不溶於手
             </p>
-            <button class="btn btn-dark rounded-0 mt-6" @click="viewProducts">選購產品</button>
+            <button class="btn btn-dark rounded-0 mt-6" @click="viewProducts">享美味</button>
           </div>
         </div>
       </div>
@@ -119,7 +119,7 @@
               首頁 <span class="sr-only">(current)</span>
             </router-link>
             <router-link to="/products" class="nav-item nav-link mr-4">
-              產品
+              享美味
             </router-link>
             <router-link to="/coupon" class="nav-item nav-link mr-4">
               享折扣

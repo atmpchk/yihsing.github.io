@@ -38,7 +38,7 @@
               <router-link to="/" exact>首頁</router-link>
             </li>
             <li class="breadcrumb-item">
-              <router-link to="/products">產品</router-link>
+              <router-link to="/products">享美味</router-link>
             </li>
           </ol>
         </nav>
@@ -92,7 +92,7 @@
         <p class="text-muted">{{ product.description }}</p>
       </div>
     </div>
-    <h3 class="font-weight-bold" v-if="haveRelatedProducts">更多相關產品</h3>
+    <h3 class="font-weight-bold" v-if="haveRelatedProducts">更多相關美味</h3>
     <div class="swiper-container mt-4 mb-5" v-if="haveRelatedProducts">
       <div class="row">
         <div class="col-md-6" v-for="product in relatedProducts" :key="product.id">

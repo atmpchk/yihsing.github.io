@@ -9,7 +9,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="border-0 pl-0">產品</th>
+                  <th scope="col" class="border-0 pl-0">美味</th>
                   <th scope="col" class="border-0">數量</th>
                   <th scope="col" class="border-0">單價</th>
                   <th scope="col" class="border-0"></th>

@@ -17,7 +17,7 @@
               :class="{ active: currGroup === '*'}"
               @click="switchGroup('*')"
             >
-              所有產品
+              所有美味
             </button>
             <button type="button"
               v-if="haveFavorites"
