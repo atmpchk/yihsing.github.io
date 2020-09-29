@@ -86,7 +86,7 @@
     </div>
     <div class="row my-5">
       <div class="col-md-4">
-        <p>{{ product.content }}</p>
+        <p v-html="product.content"></p>
       </div>
       <div class="col-md-3">
         <p class="text-muted">{{ product.description }}</p>
